@@ -1,0 +1,16 @@
+<app-title
+  title="Administrar Comidas"
+  subtitle="Crea, organiza y actualiza los platos del restaurante"
+>
+  <a
+    routerLink="/comidas/nueva-comida"
+    class="bg-slate-900 text-white px-4 py-3 rounded-xl font-semibold flex items-center gap-x-1"
+  >
+    <lucide-angular [img]="PlusIcon" [strokeWidth]="1.5" />
+    Nueva Comida
+  </a>
+</app-title>
+
+<div class="rounded-xl shadow-xl">
+  <app-table [data]="data" [columns]="columns" />
+</div>

@@ -1,0 +1,27 @@
+<main class="w-full mt-4">
+  <table class="w-full table-auto">
+    <thead>
+      <tr>
+        @for (header of getHeaders(); track $index) {
+        <th>
+          <div
+            class="py-4 border-y border-t-0 border-gray-300 w-full text-gray-500 text-start px-3"
+            [innerHTML]="header"
+          ></div>
+        </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for(row of getCells(); track $index) {
+      <tr class="border-b border-gray-300 last:border-none">
+        @for(cell of row; track $index) { @if(cell){
+        <td>
+          <div class="py-4 px-3 font-semibold" [innerHTML]="cell"></div>
+        </td>
+        } }
+      </tr>
+      }
+    </tbody>
+  </table>
+</main>
