@@ -5,6 +5,7 @@ import { Link } from '../../ui/link/link';
 import { AuthService } from '../../../services/auth/auth-service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { getRole } from '../../../utils/getRole';
 
 @Component({
   selector: 'app-aside',
@@ -39,5 +40,9 @@ export class Aside implements AfterViewInit {
       }
     };
     document.addEventListener('click', handleOutsideClick);
+  }
+
+  parseRole() {
+    return getRole(this.authService.user?.role || '');
   }
 }
