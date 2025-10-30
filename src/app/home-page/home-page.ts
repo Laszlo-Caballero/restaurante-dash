@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth/auth-service';
+import { Button } from '../../components/ui/button/button';
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [Button],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
