@@ -1,0 +1,12 @@
+<article class="flex flex-col w-full h-full rounded-xl border border-slate-200">
+  <img [src]="getImageUrl()" class="w-full h-[158px] object-cover rounded-t-lg" />
+  <div class="p-3 flex items-center w-full gap-x-2">
+    <lucide-angular [img]="ImageIcon" [strokeWidth]="1.5" />
+    <div class="flex flex-col w-full overflow-hidden">
+      <p class="font-semibold text-wrap wrap-break-word">
+        {{ getTitle() }}
+      </p>
+      <p class="font-semibold text-sm text-slate-400">{{ uploadImage.split('T')[0] }}</p>
+    </div>
+  </div>
+</article>

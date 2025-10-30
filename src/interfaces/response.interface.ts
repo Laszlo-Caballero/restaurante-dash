@@ -11,3 +11,9 @@ export interface ResponseApi<T> {
   message: string;
   data: T;
 }
+
+export interface ResponseRecurso {
+  recursoId: number;
+  nombre: string;
+  fechaCreacion: string;
+}
