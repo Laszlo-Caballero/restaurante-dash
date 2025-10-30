@@ -11,7 +11,6 @@ import { ColumnDef } from '../../interfaces/table.interface';
   selector: 'app-comida-page',
   imports: [LucideAngularModule, Title, RouterLink, Table],
   templateUrl: './comida-page.html',
-  styleUrl: './comida-page.css',
 })
 export class ComidaPage {
   readonly PlusIcon = Plus;

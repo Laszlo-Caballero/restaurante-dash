@@ -6,7 +6,6 @@ import { Button } from '../../components/ui/button/button';
   selector: 'app-home-page',
   imports: [Button],
   templateUrl: './home-page.html',
-  styleUrl: './home-page.css',
 })
 export class HomePage {
   authService = inject(AuthService);

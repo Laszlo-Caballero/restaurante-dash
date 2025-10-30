@@ -9,7 +9,6 @@ import { AuthService } from '../../services/auth/auth-service';
   selector: 'app-login',
   imports: [ReactiveFormsModule, InputComponent, Button],
   templateUrl: './login.html',
-  styleUrl: './login.css',
 })
 export class Login {
   loginForm = new FormGroup({

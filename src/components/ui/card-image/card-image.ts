@@ -6,7 +6,6 @@ import { parseTitle } from '../../../utils/parseTitleImage';
   selector: 'app-card-image',
   imports: [LucideAngularModule],
   templateUrl: './card-image.html',
-  styleUrl: './card-image.css',
 })
 export class CardImage {
   private imageUrl = 'http://localhost:8080/images';

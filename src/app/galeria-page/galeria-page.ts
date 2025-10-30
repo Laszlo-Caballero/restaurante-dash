@@ -11,7 +11,6 @@ import { CardImage } from '../../components/ui/card-image/card-image';
   selector: 'app-galeria-page',
   imports: [Title, LucideAngularModule, Load, CardImage],
   templateUrl: './galeria-page.html',
-  styleUrl: './galeria-page.css',
 })
 export class GaleriaPage implements OnInit {
   isLoading = false;

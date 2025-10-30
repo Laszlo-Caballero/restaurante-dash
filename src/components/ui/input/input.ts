@@ -7,7 +7,6 @@ import { InputControl, InputError } from '../../../interfaces/input.interface';
   imports: [FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input.html',
-  styleUrl: './input.css',
   standalone: true,
   providers: [
     {

@@ -5,7 +5,6 @@ import { cx } from '../../../utils/cx';
   selector: 'app-button',
   imports: [],
   templateUrl: './button.html',
-  styleUrl: './button.css',
 })
 export class Button {
   @Input({ required: false }) click: (event: Event) => void = () => {};
