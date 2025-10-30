@@ -1,0 +1,8 @@
+<div
+  class="fixed top-0 right-0 h-screen w-full bg-black/50 flex items-center justify-center z-100"
+  (click)="click.emit()"
+>
+  <main class="min-w-[560px] p-5 bg-white rounded-3xl" (click)="$event.stopPropagation()">
+    <ng-content></ng-content>
+  </main>
+</div>
