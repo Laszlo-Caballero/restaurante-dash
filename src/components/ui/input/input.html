@@ -5,5 +5,7 @@
     id="{{ id }}"
     placeholder="{{ placeholder }}"
     class="p-[13px] rounded-xl border border-slate-100 placeholder:font-semibold"
+    [(ngModel)]="value"
+    (input)="onChange(value)"
   />
 </div>

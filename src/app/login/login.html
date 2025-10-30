@@ -1,19 +1,33 @@
 <main class="min-h-screen flex w-full">
-  <img src="/login.jpg" class="w-1/2 object-cover" />
+  <img src="/login.jpg" class="w-1/2 object-cover max-h-screen" />
 
   <div class="w-full flex flex-1 items-center justify-center">
-    <form class="min-w-[520px] flex flex-col h-full gap-y-2 justify-center">
+    <form
+      class="min-w-[520px] flex flex-col h-full gap-y-2 justify-center"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
       <header class="flex items-center gap-x-2.5">
         <span class="size-8 rounded-full bg-slate-100 block"></span>
-        <h1 class="text-xl font-semibold">Restaurnate Dashboard</h1>
+        <h1 class="text-xl font-semibold">Restaurante Dashboard</h1>
       </header>
 
       <section class="flex flex-col">
-        <app-input id="email" label="Correo Electronico" placeholder="tu@email.com" />
-        <app-input id="password" label="Contraseña" placeholder="••••••••" />
+        <app-input
+          id="user"
+          label="Usuario"
+          placeholder="Ingrese su usuario"
+          formControlName="username"
+        />
+        <app-input
+          id="password"
+          label="Contraseña"
+          placeholder="••••••••"
+          formControlName="password"
+        />
       </section>
 
-      <app-button className="w-full mt-3"> Iniciar Sesión </app-button>
+      <app-button className="w-full mt-3" type="submit"> Iniciar Sesión </app-button>
     </form>
   </div>
 </main>

@@ -1,13 +1,43 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
-  imports: [],
+  imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input.html',
   styleUrl: './input.css',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: InputComponent,
+      multi: true,
+    },
+  ],
 })
-export class InputComponent {
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
-  @Input() id: string = '';
+export class InputComponent implements ControlValueAccessor {
+  @Input() label = '';
+  @Input() placeholder = '';
+  @Input() id = '';
+
+  value = '';
+  disabled = false;
+  onChange: (value: string) => void = () => {};
+  onTouch: () => void = () => {};
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouch = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  writeValue(value: string): void {
+    this.value = value;
+  }
 }
