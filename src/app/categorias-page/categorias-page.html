@@ -1,0 +1,30 @@
+<app-title
+  title="Categorías"
+  subtitle="Gestiona las categorías de tu menú para una mejor organización de los platillos."
+>
+  <app-tooltip
+    text="Solo Administradores"
+    [position]="PositionTooltip.BOTTOM"
+    [disable]="authService.isAdmin()"
+  >
+    <app-button className="flex items-center gap-2" [disabled]="!authService.isAdmin()">
+      <lucide-angular [img]="PlusIcon" />
+      Nueva Categoría
+    </app-button>
+  </app-tooltip>
+</app-title>
+
+<section class="grid grid-cols-5 gap-4 mt-4">
+  @for(category of categories; track category.id){
+  <app-card-category
+    [categoryName]="category.nombre"
+    [categoryDescription]="category.descripcion"
+    [categoryImageUrl]="category.recurso.nombre"
+    [itemCount]="category.totalComidas"
+  />
+  }
+</section>
+
+@if(isLoading){
+<app-load />
+}

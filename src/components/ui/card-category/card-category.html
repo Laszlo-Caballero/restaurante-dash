@@ -1,0 +1,29 @@
+<section class="p-[17px] w-full h-full border space-y-2 border-slate-300 rounded-3xl">
+  <header class="flex items-center justify-between">
+    <div class="flex items-center gap-x-2">
+      <img
+        [src]="getImageUrl()"
+        alt="{{ categoryName }}"
+        class="w-10 h-10 rounded-full object-cover"
+      />
+      <h3 class="text-lg font-medium text-slate-700">{{ categoryName }}</h3>
+    </div>
+
+    <app-button
+      className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
+    >
+      <lucide-angular [img]="EditIcon" class="size-4" />
+      Editar
+    </app-button>
+  </header>
+
+  <div class="flex items-center justify-between">
+    <p class="text-slate-400 text-sm">
+      {{ categoryDescription }}
+    </p>
+
+    <span class="block py-2 px-4 rounded-4xl border font-semibold border-slate-300 bg-slate-50">
+      {{ itemCount }} platos
+    </span>
+  </div>
+</section>

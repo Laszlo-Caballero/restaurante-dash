@@ -12,6 +12,15 @@ export interface ResponseApi<T> {
   data: T;
 }
 
+export interface ResponseCategoria {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  // comidas: any[]
+  recurso: ResponseRecurso;
+  totalComidas: number;
+}
+
 export interface ResponseRecurso {
   recursoId: number;
   nombre: string;

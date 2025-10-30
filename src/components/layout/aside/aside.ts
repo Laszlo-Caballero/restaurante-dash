@@ -1,5 +1,13 @@
 import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { Image, LayoutGrid, LogOut, LucideAngularModule, User, Utensils } from 'lucide-angular';
+import {
+  Image,
+  LayoutGrid,
+  LogOut,
+  LucideAngularModule,
+  Tags,
+  User,
+  Utensils,
+} from 'lucide-angular';
 import { cx } from '../../../utils/cx';
 import { Link } from '../../ui/link/link';
 import { AuthService } from '../../../services/auth/auth-service';
@@ -19,6 +27,8 @@ export class Aside implements AfterViewInit {
   readonly LogOutIcon = LogOut;
   readonly UserIcon = User;
   readonly GaleryIcon = Image;
+  readonly TagsIcon = Tags;
+
   authService = inject(AuthService);
   isOpen = false;
   @ViewChild('userDropdown') userDropdown!: ElementRef<HTMLDivElement>;

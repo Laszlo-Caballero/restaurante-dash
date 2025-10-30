@@ -7,6 +7,7 @@ import { authGuard } from '../guards/auth-guard';
 import { GaleriaPage } from './galeria-page/galeria-page';
 import { adminGuard } from '../guards/admin-guard';
 import { CrearComida } from './comida-page/crear-comida/crear-comida';
+import { CategoriasPage } from './categorias-page/categorias-page';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'galeria',
         component: GaleriaPage,
+      },
+      {
+        path: 'categorias',
+        component: CategoriasPage,
       },
     ],
   },
