@@ -3,14 +3,16 @@ import { HomePage } from './home-page/home-page';
 import { ComidaPage } from './comida-page/comida-page';
 import { Login } from './login/login';
 import { Dashboard } from '../components/layout/dashboard/dashboard';
-import { authGuardGuard } from '../guards/auth-guard-guard';
+import { authGuard } from '../guards/auth-guard';
 import { GaleriaPage } from './galeria-page/galeria-page';
+import { adminGuard } from '../guards/admin-guard';
+import { CrearComida } from './comida-page/crear-comida/crear-comida';
 
 export const routes: Routes = [
   {
     path: '',
     component: Dashboard,
-    canActivateChild: [authGuardGuard],
+    canActivateChild: [authGuard],
     children: [
       {
         path: '',
@@ -23,6 +25,17 @@ export const routes: Routes = [
       {
         path: 'galeria',
         component: GaleriaPage,
+      },
+    ],
+  },
+  {
+    path: '',
+    component: Dashboard,
+    canActivateChild: [authGuard, adminGuard],
+    children: [
+      {
+        path: 'comidas/nueva-comida',
+        component: CrearComida,
       },
     ],
   },
