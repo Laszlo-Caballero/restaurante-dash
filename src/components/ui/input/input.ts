@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputControl, InputError } from '../../../interfaces/input.interface';
 
@@ -8,10 +8,11 @@ import { InputControl, InputError } from '../../../interfaces/input.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input.html',
   styleUrl: './input.css',
+  standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: InputComponent,
+      useExisting: forwardRef(() => InputComponent),
       multi: true,
     },
   ],

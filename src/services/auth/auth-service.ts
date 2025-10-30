@@ -10,6 +10,7 @@ import { ResponseApi } from '../../interfaces/response.interface';
 })
 export class AuthService {
   public user: User | null = null;
+  public token = '';
   private readonly storageKey = 'auth_user';
   private httpService = inject(HttpService);
   private router = inject(Router);
@@ -17,7 +18,9 @@ export class AuthService {
   constructor() {
     const storedUser = localStorage.getItem(this.storageKey);
     if (storedUser) {
-      this.user = JSON.parse(storedUser);
+      const parseUser: User = JSON.parse(storedUser);
+      this.user = parseUser;
+      this.token = parseUser.token;
     }
   }
 
@@ -27,6 +30,7 @@ export class AuthService {
 
   logout() {
     this.user = null;
+    this.token = '';
     localStorage.removeItem(this.storageKey);
     this.router.navigate(['/auth/login']);
   }
@@ -36,6 +40,7 @@ export class AuthService {
       next: (res) => {
         this.user = res.data;
         localStorage.setItem(this.storageKey, JSON.stringify(res.data));
+        this.token = res.data.token;
         this.router.navigate(['/']);
         toast.success('Inicio de sesión exitoso');
       },

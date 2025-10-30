@@ -1,18 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { LayoutGrid, LucideAngularModule, Utensils } from 'lucide-angular';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { LayoutGrid, LogOut, LucideAngularModule, User, Utensils } from 'lucide-angular';
 import { cx } from '../../../utils/cx';
 import { Link } from '../../ui/link/link';
+import { AuthService } from '../../../services/auth/auth-service';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-aside',
   standalone: true,
-  imports: [LucideAngularModule, Link],
+  imports: [LucideAngularModule, Link, RouterLink, FormsModule],
   templateUrl: './aside.html',
 })
-export class Aside {
+export class Aside implements AfterViewInit {
   readonly LayoutGridIcon = LayoutGrid;
   readonly UtensilsIcon = Utensils;
+  readonly LogOutIcon = LogOut;
+  readonly UserIcon = User;
+  authService = inject(AuthService);
+  isOpen = false;
+  @ViewChild('userDropdown') userDropdown!: ElementRef<HTMLDivElement>;
 
   currentRoute: string = '';
   cx = cx;
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+
+  ngAfterViewInit() {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        !this.userDropdown.nativeElement.contains(event.target as Node) &&
+        event.target !== this.userDropdown.nativeElement
+      ) {
+        console.log('Clicked outside');
+        this.isOpen = false;
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+  }
 }
