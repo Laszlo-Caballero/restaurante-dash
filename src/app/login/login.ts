@@ -2,9 +2,8 @@ import { Component, inject } from '@angular/core';
 import { InputComponent } from '../../components/ui/input/input';
 import { Button } from '../../components/ui/button/button';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpService } from '../../services/http/http-service';
 import { InputError } from '../../interfaces/input.interface';
-import { toast } from 'ngx-sonner';
+import { AuthService } from '../../services/auth/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,7 @@ export class Login {
     password: new FormControl('', [Validators.required, Validators.minLength(1)]),
   });
 
-  private httpService = inject(HttpService);
+  private authService = inject(AuthService);
 
   usernameErrors: InputError[] = [
     { type: 'required', message: 'El usuario es obligatorio.' },
@@ -32,16 +31,10 @@ export class Login {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.httpService.post('auth/login', { username, password }).subscribe({
-        next: (res) => {
-          console.log('Login successful', res);
-          toast.success('Inicio de sesión exitoso');
-        },
-        error: (err) => {
-          console.error('Login failed', err);
-          toast.error('Error en el inicio de sesión');
-        },
+      const data = this.loginForm.value;
+      this.authService.login({
+        username: data.username || '',
+        password: data.password || '',
       });
     }
   }

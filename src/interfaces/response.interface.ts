@@ -5,3 +5,9 @@ export interface ComidaResponse {
   precio: number;
   disponible: boolean;
 }
+
+export interface ResponseApi<T> {
+  code: number;
+  message: string;
+  data: T;
+}
