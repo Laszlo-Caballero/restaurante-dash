@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputControl, InputError } from '../../../interfaces/input.interface';
 
 @Component({
   selector: 'app-input',
@@ -19,6 +20,9 @@ export class InputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = '';
   @Input() id = '';
+  @Input() control!: InputControl;
+  @Input() errors: InputError[] = [];
+  @Input() type: 'text' | 'password' | 'email' = 'text';
 
   value = '';
   disabled = false;

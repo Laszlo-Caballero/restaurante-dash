@@ -18,12 +18,18 @@
           label="Usuario"
           placeholder="Ingrese su usuario"
           formControlName="username"
+          [control]="loginForm.get('username')"
+          [errors]="usernameErrors"
         />
+
         <app-input
           id="password"
+          type="password"
           label="Contraseña"
           placeholder="••••••••"
           formControlName="password"
+          [control]="loginForm.get('password')"
+          [errors]="passwordErrors"
         />
       </section>
 

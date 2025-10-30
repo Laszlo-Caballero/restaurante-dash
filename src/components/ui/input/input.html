@@ -1,11 +1,19 @@
 <div class="flex flex-col gap-y-2">
   <label for="{{ id }}" class="text-slate-400 font-semibold">{{ label }}</label>
   <input
-    type="text"
+    [type]="type"
     id="{{ id }}"
     placeholder="{{ placeholder }}"
     class="p-[13px] rounded-xl border border-slate-100 placeholder:font-semibold"
     [(ngModel)]="value"
     (input)="onChange(value)"
   />
+
+  @if(control?.invalid && (control?.touched || control?.dirty)) {
+  <div class="mt-1 text-sm text-red-500">
+    @for( inputError of errors; track $index ) { @if(control?.hasError(inputError.type)) {
+    <p>{{ inputError.message }}</p>
+    } }
+  </div>
+  }
 </div>
