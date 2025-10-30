@@ -1,0 +1,16 @@
+<div class="relative" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <ng-content></ng-content>
+  @if(isHovered && !disable){
+  <div
+    [className]="
+      cx('absolute z-10 flex flex-col items-center justify-center', getPositionClasses())
+    "
+  >
+    <div class="triangle-clip"></div>
+
+    <span class="p-2.5 rounded-xl block bg-slate-900 text-white text-nowrap font-semibold">
+      {{ text }}
+    </span>
+  </div>
+  }
+</div>

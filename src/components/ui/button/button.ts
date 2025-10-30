@@ -10,6 +10,7 @@ export class Button {
   @Input({ required: false }) click = new EventEmitter<Event>();
   @Input({ required: false }) type: 'button' | 'submit' | 'reset' = 'button';
   @Input({ required: false }) className: string = '';
+  @Input({ required: false }) disabled = false;
 
   cx = cx;
 }

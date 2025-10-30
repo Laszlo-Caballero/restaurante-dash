@@ -2,10 +2,20 @@
   title="Galería"
   subtitle="Explora nuestra colección de imágenes de deliciosos platillos y momentos especiales en nuestro restaurante."
 >
-  <app-button className="flex items-center gap-2" (click)="onOpenModal()">
-    <lucide-angular [img]="UploadIcon" />
-    Subir Imagen
-  </app-button>
+  <app-tooltip
+    text="Solo Administradores"
+    [position]="PositionTooltip.BOTTOM"
+    [disable]="authService.isAdmin()"
+  >
+    <app-button
+      className="flex items-center gap-2"
+      [disabled]="!authService.isAdmin()"
+      (click)="onOpenModal()"
+    >
+      <lucide-angular [img]="UploadIcon" />
+      Subir Imagen
+    </app-button>
+  </app-tooltip>
 </app-title>
 
 <main class="grid grid-cols-6 gap-4 mt-4">
@@ -18,15 +28,55 @@
 <app-load />
 } @if (isOpenModal) {
 <app-modal (click)="onCloseModal()">
-  <input type="file" class="hidden" #fileInput (change)="dropService.onChangeInputFile($event)" />
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Enviar Imagen</h2>
 
-  <div
-    (drop)="dropService.handleDrop($event)"
-    (dragover)="dropService.handleDragOver($event)"
-    (dragleave)="dropService.handleDragLeave($event)"
-    (click)="onClickInputFile()"
-  >
-    subir archivo
-  </div>
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+  <section class="flex flex-col gap-y-4 w-full">
+    <div class="flex flex-col gap-y-2 w-full">
+      <p class="font-semibold">Archivo</p>
+      <button
+        class="flex items-center p-[13px] text-slate-400 border rounded-xl border-slate-300 gap-2.5"
+        (click)="onClickInputFile()"
+      >
+        <lucide-angular [img]="UploadIcon" class="size-[18px]" />
+        Seleccionar Archivo
+      </button>
+    </div>
+
+    <input type="file" class="hidden" #fileInput (change)="dropService.onChangeInputFile($event)" />
+
+    <div
+      (drop)="dropService.handleDrop($event)"
+      (dragover)="dropService.handleDragOver($event)"
+      (dragleave)="dropService.handleDragLeave($event)"
+      (click)="onClickInputFile()"
+      [className]="
+        cx(
+          'w-full rounded-3xl cursor-pointer',
+          !file
+            ? 'border-dashed border-2 border-slate-200 p-8 flex flex-col gap-2'
+            : 'h-[400px] overflow-hidden'
+        )
+      "
+    >
+      @if(file){
+      <img [src]="getFileUrl()" class="h-full w-full object-cover" />
+      }@else{
+      <lucide-icon [img]="PhotoIcon" class="size-8 mx-auto text-slate-300" />
+      <p class="text-center text-slate-400">Arrastra y suelta un archivo aquí</p>
+      }
+    </div>
+
+    <footer class="flex justify-end w-full">
+      <app-button (click)="onUploadFile()" className="flex items-center gap-2">
+        <lucide-angular [img]="SendIcon" />
+        Subir Imagen</app-button
+      >
+    </footer>
+  </section>
 </app-modal>
 }

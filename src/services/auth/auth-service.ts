@@ -4,6 +4,8 @@ import { HttpService } from '../http/http-service';
 import { Router } from '@angular/router';
 import { toast } from 'ngx-sonner';
 import { ResponseApi } from '../../interfaces/response.interface';
+import { Role } from '../../enum/Role';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +30,10 @@ export class AuthService {
     return this.user !== null;
   }
 
+  isAdmin() {
+    return this.user?.role === Role.ADMIN;
+  }
+
   logout() {
     this.user = null;
     this.token = '';
@@ -45,8 +51,9 @@ export class AuthService {
         toast.success('Inicio de sesión exitoso');
       },
       error: (err) => {
-        console.error('Login failed', err);
-        toast.error('Error en el inicio de sesión');
+        const parseError = err as HttpErrorResponse;
+        const bodyError = parseError.error as ResponseApi<null>;
+        toast.error(bodyError.message || 'Error en el inicio de sesión');
       },
     });
   }

@@ -1,7 +1,13 @@
 <button
   (click)="click.emit($event)"
+  [disabled]="disabled"
   type="{{ type }}"
-  [className]="cx('p-[13px] rounded-xl bg-slate-900 font-semibold text-white', className)"
+  [className]="
+    cx(
+      'p-[13px] rounded-xl bg-slate-900 font-semibold text-white disabled:bg-slate-900/50',
+      className
+    )
+  "
 >
   <ng-content></ng-content>
 </button>
