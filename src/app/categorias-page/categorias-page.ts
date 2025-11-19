@@ -15,6 +15,8 @@ import { InputComponent } from '../../components/ui/input/input';
 import { TextArea } from '../../components/ui/text-area/text-area';
 import { GaleryModal } from '../../components/shared/galery-modal/galery-modal';
 import { GaleryModalValue } from '../../components/shared/galery-modal/value.interface';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { InputError } from '../../interfaces/input.interface';
 
 @Component({
   selector: 'app-categorias-page',
@@ -29,6 +31,7 @@ import { GaleryModalValue } from '../../components/shared/galery-modal/value.int
     InputComponent,
     TextArea,
     GaleryModal,
+    ReactiveFormsModule,
   ],
   templateUrl: './categorias-page.html',
 })
@@ -52,6 +55,29 @@ export class CategoriasPage implements OnInit {
   selectedImage: GaleryModalValue = {
     recursoId: -1,
   };
+
+  categoriaForm = new FormGroup({
+    nombre: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required, Validators.minLength(10)]),
+  });
+
+  nombreErrors: InputError[] = [
+    {
+      type: 'required',
+      message: 'El nombre de la categoría es obligatorio.',
+    },
+  ];
+
+  descripcionErrors: InputError[] = [
+    {
+      type: 'required',
+      message: 'La descripción de la categoría es obligatoria.',
+    },
+    {
+      type: 'minlength',
+      message: 'La descripción debe tener al menos 10 caracteres.',
+    },
+  ];
 
   ngOnInit(): void {
     this.loadCategories();
@@ -85,6 +111,75 @@ export class CategoriasPage implements OnInit {
   onSelectImage = (value: GaleryModalValue) => {
     this.selectedImage = value;
   };
+
+  onSubmitCategory() {
+    if (this.categoriaForm.invalid) {
+      toast.error('Por favor, complete el formulario correctamente');
+      return;
+    }
+    const { nombre, descripcion } = this.categoriaForm.value;
+
+    if (this.selectedImage.recursoId === -1 && !this.selectedImage.file) {
+      toast.error('Debe seleccionar una imagen para la categoría');
+      return;
+    }
+
+    this.isLoading = true;
+
+    const recursoId = this.selectedImage.recursoId;
+
+    if (this.selectedImage.file) {
+      const formData = new FormData();
+      formData.append('file', this.selectedImage.file);
+      this.httpService
+        .post<{ recursoId: number }>('recursos', formData, {
+          headers: {
+            Authorization: `Bearer ${this.authService.token}`,
+          },
+        })
+        .subscribe({
+          next: (response) => {
+            const recursoId = response.recursoId;
+            this.createCategory(nombre!, descripcion!, recursoId);
+          },
+          error: () => {
+            this.isLoading = false;
+            toast.error('Error al subir la imagen');
+          },
+        });
+    } else {
+      this.createCategory(nombre!, descripcion!, recursoId);
+    }
+  }
+
+  private createCategory(nombre: string, descripcion: string, recursoId: number) {
+    this.httpService
+      .post<ResponseApi<ResponseCategoria>>(
+        'categorias',
+        {
+          nombre,
+          descripcion,
+          recursoId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.authService.token}`,
+          },
+        }
+      )
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.onCloseModal();
+          toast.success('Categoría creada exitosamente');
+          this.loadCategories();
+        },
+        error: () => {
+          this.isLoading = false;
+          toast.error('Error al crear la categoría');
+        },
+      });
+  }
 
   loadCategories() {
     this.isLoading = true;

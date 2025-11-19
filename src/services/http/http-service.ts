@@ -13,7 +13,7 @@ export class HttpService {
     return this.http.get<R>(`${this.baseUrl}/${path}`, options);
   }
 
-  post<R, B>(path: string, body: B, options?: OptionsHttp) {
+  post<R, B = unknown>(path: string, body: B, options?: OptionsHttp) {
     return this.http.post<R>(`${this.baseUrl}/${path}`, body, options);
   }
 
