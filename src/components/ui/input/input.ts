@@ -5,9 +5,7 @@ import { InputControl, InputError } from '../../../interfaces/input.interface';
 @Component({
   selector: 'app-input',
   imports: [FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input.html',
-  standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

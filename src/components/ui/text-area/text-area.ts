@@ -5,9 +5,7 @@ import { InputControl, InputError } from '../../../interfaces/input.interface';
 @Component({
   selector: 'app-text-area',
   imports: [FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './text-area.html',
-  standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

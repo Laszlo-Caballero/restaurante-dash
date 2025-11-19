@@ -12,6 +12,7 @@ import { Load } from '../../components/ui/load/load';
 import { CardCategory } from '../../components/ui/card-category/card-category';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCategoria } from '../../modules/categorias/create-categoria/create-categoria';
+import { UpdateCategoria } from '../../modules/categorias/update-categoria/update-categoria';
 
 @Component({
   selector: 'app-categorias-page',
@@ -24,6 +25,7 @@ import { CreateCategoria } from '../../modules/categorias/create-categoria/creat
     CardCategory,
     ReactiveFormsModule,
     CreateCategoria,
+    UpdateCategoria,
   ],
   templateUrl: './categorias-page.html',
 })
@@ -35,6 +37,8 @@ export class CategoriasPage implements OnInit {
   isLoading = false;
   isError = false;
   isOpenModal = false;
+  isOpenEdit = false;
+  selectedCategoryId: number | null = null;
 
   PositionTooltip = PositionTooltip;
   PlusIcon = Plus;
@@ -49,6 +53,17 @@ export class CategoriasPage implements OnInit {
 
   onCloseModal = () => {
     this.isOpenModal = false;
+    this.loadCategories();
+  };
+
+  openEditModal = (categoryId: number) => {
+    this.isOpenEdit = true;
+    this.selectedCategoryId = categoryId;
+  };
+
+  closeEditModal = () => {
+    this.isOpenEdit = false;
+    this.selectedCategoryId = null;
     this.loadCategories();
   };
 

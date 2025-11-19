@@ -25,6 +25,8 @@
     [categoryDescription]="category.descripcion"
     [categoryImageUrl]="category.recurso.nombre"
     [itemCount]="category.totalComidas"
+    [categoryId]="category.id"
+    [openEditModal]="openEditModal"
   />
   }
 </section>
@@ -33,4 +35,6 @@
 <app-load />
 } @if(isOpenModal){
 <app-create-categoria [onCloseModal]="onCloseModal" />
+} @if(isOpenEdit && selectedCategoryId !== null){
+<app-update-categoria [categoriaId]="selectedCategoryId" [onCloseModal]="closeEditModal" />
 }

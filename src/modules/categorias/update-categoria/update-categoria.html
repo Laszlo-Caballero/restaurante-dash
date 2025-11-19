@@ -1,0 +1,67 @@
+<app-modal (click)="onCloseModal()">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Actualizar Categoria</h2>
+
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <form class="flex flex-col gap-y-3" [formGroup]="categoriaForm" (ngSubmit)="onSubmitCategory()">
+    <app-input
+      id="nombre"
+      type="text"
+      label="Nombre de la categoría"
+      placeholder="Ingrese el nombre de la categoría"
+      formControlName="nombre"
+      [control]="categoriaForm.get('nombre')"
+      [errors]="nombreErrors"
+    />
+
+    <app-text-area
+      id="descripcion"
+      label="Descripción"
+      placeholder="Ingrese una descripción para la categoría"
+      formControlName="descripcion"
+      [control]="categoriaForm.controls.descripcion"
+      [errors]="descripcionErrors"
+    />
+
+    <div class="flex flex-col gap-y-2 cursor-pointer" (click)="openGaleryModal()">
+      <p class="text-slate-400 font-semibold">Imagen de la categoría</p>
+      <span
+        class="border-2 border-dashed h-[200px] border-slate-300 flex items-center justify-center rounded-3xl"
+      >
+        <div class="flex flex-col items-center gap-y-2 w-full h-full justify-center p-2">
+          @if(selectedImage.recursoId == -1 && !selectedImage.file){
+          <lucide-icon [img]="UploadIcon" />
+          <p>Haga clic para seleccionar una imagen</p>
+          } @if(selectedImage.recursoId != -1){
+          <img [src]="getImageUrl()" class="h-full w-full object-cover rounded-lg" />
+          } @if(selectedImage.file){
+          <img [src]="getFileUrl()" class="h-full w-full object-cover rounded-lg" />
+          }
+        </div>
+      </span>
+    </div>
+
+    <footer class="flex justify-end w-full gap-x-2">
+      <app-button
+        className="bg-transparent text-black border border-slate-300"
+        (click)="onCloseModal()"
+      >
+        Cancelar
+      </app-button>
+      <app-button type="submit"> Actualizar Categoria </app-button>
+    </footer>
+  </form>
+</app-modal>
+
+@if(isGaleryModalOpen){
+<app-galery-modal
+  [onClose]="onCloseGaleryModal"
+  [selectedImage]="selectedImage"
+  [onSelect]="onSelectImage"
+/>} @if(isLoading){
+<app-load />
+}

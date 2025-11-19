@@ -11,6 +11,7 @@
 
     <app-button
       className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
+      (click)="openEditModal(categoryId)"
     >
       <lucide-angular [img]="EditIcon" class="size-4" />
       Editar

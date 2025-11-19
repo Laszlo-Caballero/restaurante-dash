@@ -17,7 +17,7 @@ export class HttpService {
     return this.http.post<R>(`${this.baseUrl}/${path}`, body, options);
   }
 
-  put<R, B>(path: string, body: B, options?: OptionsHttp) {
+  put<R, B = unknown>(path: string, body: B, options?: OptionsHttp) {
     return this.http.put<R>(`${this.baseUrl}/${path}`, body, options);
   }
 

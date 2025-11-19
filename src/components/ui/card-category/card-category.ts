@@ -12,7 +12,11 @@ export class CardCategory {
   @Input({ required: true }) categoryName!: string;
   @Input({ required: true }) categoryImageUrl!: string;
   @Input({ required: true }) categoryDescription!: string;
+  @Input({ required: true }) categoryId!: number;
   @Input() itemCount: number = 0;
+  @Input() openEditModal!: (categoryId: number) => void;
+
+  isOpenEdit = false;
 
   EditIcon = Pen;
 
