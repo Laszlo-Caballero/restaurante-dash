@@ -1,0 +1,3 @@
+@if(tabs){
+<ng-container *ngTemplateOutlet="tabs.get(tabService.currentTab)?.tabContent"></ng-container>
+}

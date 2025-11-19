@@ -1,0 +1,19 @@
+<button
+  type="button"
+  [className]="
+    cx(
+      'flex items-center justify-center w-full gap-x-2 py-2 px-3 rounded-lg hover:bg-[#0F1724] hover:text-white text-[#94A3B8]',
+      index === tabService.currentTab && 'bg-[#0F1724] text-white'
+    )
+  "
+  (click)="tabService.setTab(index)"
+>
+  <ng-content></ng-content>
+</button>
+
+<style>
+  :host {
+    display: block;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,27 @@
+<app-modal (click)="onCloseHandler()">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Crear Categoria</h2>
+
+    <button (click)="onCloseHandler()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <app-tabs>
+    <app-tab-header>
+      <app-tab-button [index]="0">
+        <lucide-angular [img]="PhotoIcon" />
+        Galería
+      </app-tab-button>
+
+      <app-tab-button [index]="1">
+        <lucide-angular [img]="PhotoIcon" />
+        Subir Imagen
+      </app-tab-button>
+    </app-tab-header>
+    <app-tab-list>
+      <app-tab> galeria </app-tab>
+      <app-tab> subir imagen </app-tab>
+    </app-tab-list>
+  </app-tabs>
+</app-modal>

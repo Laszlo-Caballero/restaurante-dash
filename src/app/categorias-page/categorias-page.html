@@ -7,14 +7,18 @@
     [position]="PositionTooltip.BOTTOM"
     [disable]="authService.isAdmin()"
   >
-    <app-button className="flex items-center gap-2" [disabled]="!authService.isAdmin()">
+    <app-button
+      className="flex items-center gap-2"
+      [disabled]="!authService.isAdmin()"
+      (click)="openCreateCategoryModal()"
+    >
       <lucide-angular [img]="PlusIcon" />
       Nueva Categoría
     </app-button>
   </app-tooltip>
 </app-title>
 
-<section class="grid grid-cols-5 gap-4 mt-4">
+<section class="grid grid-cols-4 gap-4 mt-4">
   @for(category of categories; track category.id){
   <app-card-category
     [categoryName]="category.nombre"
@@ -27,4 +31,30 @@
 
 @if(isLoading){
 <app-load />
-}
+} @if(false){
+<app-modal (click)="onCloseModal()">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Crear Categoria</h2>
+
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <form class="flex flex-col gap-y-3">
+    <app-input
+      id="nombre"
+      type="text"
+      label="Nombre de la categoría"
+      placeholder="Ingrese el nombre de la categoría"
+    />
+
+    <app-text-area
+      id="descripcion"
+      label="Descripción"
+      placeholder="Ingrese una descripción para la categoría"
+    />
+  </form>
+</app-modal>
+} @if(isOpenModal){
+<app-galery-modal [onClose]="onCloseModal"> </app-galery-modal>}
