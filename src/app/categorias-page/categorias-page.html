@@ -31,7 +31,7 @@
 
 @if(isLoading){
 <app-load />
-} @if(false){
+} @if(isOpenModal){
 <app-modal (click)="onCloseModal()">
   <header class="flex justify-between items-center">
     <h2 class="text-xl font-semibold">Crear Categoria</h2>
@@ -54,13 +54,40 @@
       label="Descripción"
       placeholder="Ingrese una descripción para la categoría"
     />
+
+    <div class="flex flex-col gap-y-2 cursor-pointer" (click)="openGaleryModal()">
+      <p class="text-slate-400 font-semibold">Imagen de la categoría</p>
+      <span
+        class="border-2 border-dashed h-[200px] border-slate-300 flex items-center justify-center rounded-3xl"
+      >
+        <div class="flex flex-col items-center gap-y-2 w-full h-full justify-center p-2">
+          @if(selectedImage.recursoId == -1 && !selectedImage.file){
+          <lucide-icon [img]="UploadIcon" />
+          <p>Haga clic para seleccionar una imagen</p>
+          } @if(selectedImage.recursoId != -1){
+          <img [src]="getImageUrl()" class="h-full w-full object-cover rounded-lg" />
+          } @if(selectedImage.file){
+          <img [src]="getFileUrl()" class="h-full w-full object-cover rounded-lg" />
+          }
+        </div>
+      </span>
+    </div>
+
+    <footer class="flex justify-end w-full gap-x-2">
+      <app-button
+        className="bg-transparent text-black border border-slate-300"
+        (click)="onCloseModal()"
+        type="button"
+      >
+        Cancelar
+      </app-button>
+      <app-button> Crear Categoria </app-button>
+    </footer>
   </form>
 </app-modal>
-} @if(isOpenModal){
+} @if(isGaleryModalOpen){
 <app-galery-modal
-  [onClose]="onCloseModal"
+  [onClose]="onCloseGaleryModal"
   [selectedImage]="selectedImage"
   [onSelect]="onSelectImage"
->
-</app-galery-modal
->}
+/>}

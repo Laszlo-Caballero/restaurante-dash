@@ -4,7 +4,7 @@ import { Title } from '../../components/ui/title/title';
 import { Tooltip } from '../../components/ui/tooltip/tooltip';
 import { PositionTooltip } from '../../components/ui/tooltip/enum';
 import { Button } from '../../components/ui/button/button';
-import { LucideAngularModule, Plus, X } from 'lucide-angular';
+import { LucideAngularModule, Plus, Upload, X } from 'lucide-angular';
 import { HttpService } from '../../services/http/http-service';
 import { ResponseApi, ResponseCategoria } from '../../interfaces/response.interface';
 import { toast } from 'ngx-sonner';
@@ -36,14 +36,18 @@ export class CategoriasPage implements OnInit {
   authService = inject(AuthService);
   httpService = inject(HttpService);
 
+  private imageUrl = 'http://localhost:8080/images';
+
   categories: ResponseCategoria[] = [];
   isLoading = false;
   isError = false;
   isOpenModal = false;
+  isGaleryModalOpen = false;
 
   PositionTooltip = PositionTooltip;
   PlusIcon = Plus;
   XIcon = X;
+  UploadIcon = Upload;
 
   selectedImage: GaleryModalValue = {
     recursoId: -1,
@@ -59,7 +63,24 @@ export class CategoriasPage implements OnInit {
 
   onCloseModal = () => {
     this.isOpenModal = false;
+    this.selectedImage = { recursoId: -1 };
   };
+
+  openGaleryModal() {
+    this.isGaleryModalOpen = true;
+  }
+
+  onCloseGaleryModal = () => {
+    this.isGaleryModalOpen = false;
+  };
+
+  getImageUrl() {
+    return `${this.imageUrl}/${this.selectedImage.nombre}`;
+  }
+
+  getFileUrl() {
+    return URL.createObjectURL(this.selectedImage.file!);
+  }
 
   onSelectImage = (value: GaleryModalValue) => {
     this.selectedImage = value;
