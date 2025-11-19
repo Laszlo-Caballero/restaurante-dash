@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input } from '@angular/core';
 import { Image, LucideAngularModule } from 'lucide-angular';
 import { parseTitle } from '../../../utils/parseTitleImage';
+import { cx } from '../../../utils/cx';
 
 @Component({
   selector: 'app-card-image',
@@ -13,6 +14,9 @@ export class CardImage {
   @Input({ required: true }) imageTitle = '';
   @Input({ required: true }) uploadImage = '';
   @Input({ required: false }) click = new EventEmitter<Event>();
+  @Input({ required: false }) className?: string;
+
+  cx = cx;
 
   ImageIcon = Image;
 

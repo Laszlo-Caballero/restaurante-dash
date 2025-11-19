@@ -57,4 +57,10 @@
   </form>
 </app-modal>
 } @if(isOpenModal){
-<app-galery-modal [onClose]="onCloseModal"> </app-galery-modal>}
+<app-galery-modal
+  [onClose]="onCloseModal"
+  [selectedImage]="selectedImage"
+  [onSelect]="onSelectImage"
+>
+</app-galery-modal
+>}

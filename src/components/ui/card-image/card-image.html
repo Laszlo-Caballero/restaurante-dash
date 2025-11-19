@@ -1,5 +1,7 @@
 <article
-  class="flex flex-col w-full h-full rounded-xl border border-slate-200 cursor-pointer"
+  [className]="
+    cx('flex flex-col w-full h-full rounded-xl border border-slate-200 cursor-pointer', className)
+  "
   (click)="click.emit($event)"
 >
   <img [src]="getImageUrl()" class="w-full h-[158px] object-cover rounded-t-lg" />

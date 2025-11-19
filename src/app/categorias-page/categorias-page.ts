@@ -14,6 +14,7 @@ import { Modal } from '../../components/ui/modal/modal';
 import { InputComponent } from '../../components/ui/input/input';
 import { TextArea } from '../../components/ui/text-area/text-area';
 import { GaleryModal } from '../../components/shared/galery-modal/galery-modal';
+import { GaleryModalValue } from '../../components/shared/galery-modal/value.interface';
 
 @Component({
   selector: 'app-categorias-page',
@@ -44,6 +45,10 @@ export class CategoriasPage implements OnInit {
   PlusIcon = Plus;
   XIcon = X;
 
+  selectedImage: GaleryModalValue = {
+    recursoId: -1,
+  };
+
   ngOnInit(): void {
     this.loadCategories();
   }
@@ -54,6 +59,10 @@ export class CategoriasPage implements OnInit {
 
   onCloseModal = () => {
     this.isOpenModal = false;
+  };
+
+  onSelectImage = (value: GaleryModalValue) => {
+    this.selectedImage = value;
   };
 
   loadCategories() {
