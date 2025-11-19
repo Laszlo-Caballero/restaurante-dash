@@ -3,7 +3,7 @@
   (click)="click.emit()"
 >
   <main
-    class="min-w-[560px] p-5 bg-white rounded-3xl flex flex-col gap-4"
+    [className]="cx('min-w-[560px] p-5 bg-white rounded-3xl flex flex-col gap-4', className)"
     (click)="$event.stopPropagation()"
   >
     <ng-content></ng-content>

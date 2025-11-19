@@ -1,4 +1,4 @@
-<app-modal (click)="onCloseHandler()">
+<app-modal (click)="onCloseHandler()" className="w-[926px]">
   <header class="flex justify-between items-center">
     <h2 class="text-xl font-semibold">Crear Categoria</h2>
 
@@ -19,9 +19,20 @@
         Subir Imagen
       </app-tab-button>
     </app-tab-header>
-    <app-tab-list>
-      <app-tab> galeria </app-tab>
+    <app-tab-list className="h-[500px]">
+      <app-tab>
+        <main class="grid grid-cols-3 gap-4 mt-4">
+          @for(image of recursos; track image.recursoId){
+          <app-card-image [uploadImage]="image.fechaCreacion" [imageTitle]="image.nombre">
+          </app-card-image>
+          }
+        </main>
+      </app-tab>
       <app-tab> subir imagen </app-tab>
     </app-tab-list>
   </app-tabs>
 </app-modal>
+
+@if(isLoading){
+<app-load />
+}

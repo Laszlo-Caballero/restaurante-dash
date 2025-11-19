@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { Image, LucideAngularModule } from 'lucide-angular';
 import { parseTitle } from '../../../utils/parseTitleImage';
 
@@ -12,6 +12,7 @@ export class CardImage {
 
   @Input({ required: true }) imageTitle = '';
   @Input({ required: true }) uploadImage = '';
+  @Input({ required: false }) click = new EventEmitter<Event>();
 
   ImageIcon = Image;
 
