@@ -4,6 +4,10 @@ export interface ComidaResponse {
   descripcion: string;
   precio: number;
   disponible: boolean;
+  cantidadPedidos: number;
+  ventasTotales: number;
+  categorias: ResponseCategoria[];
+  recurso: ResponseRecurso;
 }
 
 export interface ResponseApi<T> {

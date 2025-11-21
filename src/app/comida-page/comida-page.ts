@@ -1,21 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Title } from '../../components/ui/title/title';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, Plus } from 'lucide-angular';
-import { ComidaResponse } from '../../interfaces/response.interface';
-import { comidaMock } from '../../mock/comida';
+import { ComidaResponse, ResponseApi } from '../../interfaces/response.interface';
 import { Table } from '../../components/ui/table/table';
 import { ColumnDef } from '../../interfaces/table.interface';
+import { HttpService } from '../../services/http/http-service';
+import { AuthService } from '../../services/auth/auth-service';
+import { toast } from 'ngx-sonner';
+
+class ImageUrl {
+  static readonly url = 'http://localhost:8080/images';
+}
 
 @Component({
   selector: 'app-comida-page',
   imports: [LucideAngularModule, Title, RouterLink, Table],
   templateUrl: './comida-page.html',
 })
-export class ComidaPage {
+export class ComidaPage implements OnInit {
+  httpService = inject(HttpService);
+  authService = inject(AuthService);
+
   readonly PlusIcon = Plus;
-  data: ComidaResponse[] = comidaMock;
+
+  data: ComidaResponse[] = [];
+
+  isLoading = false;
+
   columns: ColumnDef<ComidaResponse>[] = [
+    {
+      header: 'Imagen',
+      cell({ row }) {
+        return `<img src="${ImageUrl.url}/${row.recurso.nombre}" alt="${row.nombre}" class="w-12 h-12 object-cover rounded-lg"/>`;
+      },
+    },
     {
       header: 'Nombre',
       accessorKey: 'nombre',
@@ -34,5 +53,46 @@ export class ComidaPage {
         }</span>`;
       },
     },
+    {
+      header: 'Cantidad de Pedidos',
+      accessorKey: 'cantidadPedidos',
+    },
+    {
+      header: 'Ventas Totales',
+      accessorKey: 'ventasTotales',
+    },
+    {
+      header: 'Categorías',
+      cell({ row }) {
+        return `<span class="text-gray-600 font-medium">${row.categorias
+          .map((cat) => cat.nombre)
+          .join(', ')}</span>`;
+      },
+    },
   ];
+
+  ngOnInit() {
+    this.loadComidas();
+  }
+
+  loadComidas() {
+    this.isLoading = true;
+    this.httpService
+      .get<ResponseApi<ComidaResponse[]>>('comidas', {
+        headers: {
+          Authorization: `Bearer ${this.authService.token}`,
+        },
+      })
+      .subscribe({
+        next: (value) => {
+          this.data = value.data;
+        },
+        error: () => {
+          toast.error('Error al cargar las comidas');
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
+  }
 }
