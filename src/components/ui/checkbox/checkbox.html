@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-y-2">
+  <label class="text-slate-400 font-semibold">{{ label }}</label>
+  <span
+    [className]="
+      cx(
+        'p-[13px] rounded-xl border border-slate-100 w-full flex items-center',
+        className,
+        value && 'bg-slate-800/90 text-white'
+      )
+    "
+  >
+    {{ placeholder }}
+  </span>
+</div>

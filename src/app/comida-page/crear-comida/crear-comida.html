@@ -1,1 +1,22 @@
-<p>crear-comida works!</p>
+<form class="flex flex-col gap-y-4">
+  <app-title title="Crear Comida" subtitle="Crear una nueva comida">
+    <div class="flex items-center gap-x-2">
+      <app-button (click)="backTo()" className="bg-transparent border border-slate-300 text-black">
+        Cancelar
+      </app-button>
+      <app-button type="submit"> Crear Comida </app-button>
+    </div>
+  </app-title>
+
+  <main class="grid grid-cols-2 gap-2">
+    <app-input label="Nombre" placeholder="Ingrese el nombre de la comida" id="name" />
+    <app-input label="Slug" placeholder="Ingrese el slug de la comida" id="slug" />
+    <app-input label="Precio" placeholder="Ingrese el precio de la comida" id="price" />
+    <app-text-area
+      label="Descripción"
+      placeholder="Ingrese la descripción de la comida"
+      id="description"
+    />
+    <app-checkbox label="Disponible" placeholder="La comida está disponible" [value]="true" />
+  </main>
+</form>

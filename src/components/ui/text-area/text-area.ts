@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputControl, InputError } from '../../../interfaces/input.interface';
 
