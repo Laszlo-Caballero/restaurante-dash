@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-y-2">
-  <label class="text-slate-400 font-semibold">{{ label }}</label>
+  <label [className]="cx('text-slate-400 font-semibold', classNameLabel)">{{ label }}</label>
   <span
     [className]="
       cx(

@@ -1,11 +1,16 @@
 <div class="flex flex-col gap-y-2">
-  <label for="{{ id }}" class="text-slate-400 font-semibold">{{ label }}</label>
+  <label
+    for="{{ id }}"
+    [className]="cx('text-slate-400 font-semibold', disabled && 'text-black')"
+    >{{ label }}</label
+  >
   <textarea
     name="{{ id }}"
     placeholder="{{ placeholder }}"
-    class="p-[13px] rounded-xl border resize-none h-24 border-slate-100 placeholder:font-semibold"
+    class="p-[13px] rounded-xl border resize-none h-24 border-slate-100 placeholder:font-semibold disabled:font-semibold"
     [(ngModel)]="value"
     (input)="onChange(value)"
+    disabled="{{ disabled }}"
   ></textarea>
 
   @if(control?.invalid && (control?.touched || control?.dirty)) {

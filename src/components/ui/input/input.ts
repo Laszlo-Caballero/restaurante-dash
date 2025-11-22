@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputControl, InputError } from '../../../interfaces/input.interface';
+import { cx } from '../../../utils/cx';
 
 @Component({
   selector: 'app-input',
@@ -22,10 +23,12 @@ export class InputComponent implements ControlValueAccessor {
   @Input() errors: InputError[] = [];
   @Input() type: 'text' | 'password' | 'email' = 'text';
 
-  value = '';
-  disabled = false;
+  @Input() value = '';
+  @Input() disabled = false;
   onChange: (value: string) => void = () => {};
   onTouch: () => void = () => {};
+
+  cx = cx;
 
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;

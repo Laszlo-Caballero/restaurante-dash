@@ -7,6 +7,7 @@ export interface ComidaResponse {
   disponible: boolean;
   cantidadPedidos: number;
   ventasTotales: number;
+  gananciaTotal: number;
   categorias: ResponseCategoria[];
   recurso: ResponseRecurso;
 }

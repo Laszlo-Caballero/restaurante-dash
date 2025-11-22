@@ -10,8 +10,8 @@ export class Checkbox {
   @Input() label = '';
   @Input() placeholder = '';
   @Input() value = false;
-  @Input() onChange: (value: boolean) => void = () => {};
   @Input() className = '';
+  @Input() classNameLabel = '';
 
   cx = cx;
 }

@@ -18,6 +18,71 @@
     className="h-full"
     title="Información del Plato"
     subtitle="Detalles completos del plato seleccionado"
+    childrenClassName="grid grid-cols-2"
   >
+    <app-input
+      label="ID del Plato"
+      [disabled]="true"
+      [value]="comidaDetails()?.comidaId?.toString() ?? ''"
+    />
+    <app-input
+      label="Precio"
+      [disabled]="true"
+      [value]="'$' + comidaDetails()?.precio?.toString()"
+    />
+
+    <div class="col-span-2 flex flex-col gap-4">
+      <app-input
+        label="Nombre del Plato"
+        [disabled]="true"
+        [value]="comidaDetails()?.nombre ?? ''"
+      />
+
+      <app-text-area
+        label="Descripción"
+        [disabled]="true"
+        [value]="comidaDetails()?.descripcion ?? ''"
+      />
+    </div>
+
+    <app-checkbox
+      label="Disponible"
+      [value]="comidaDetails()?.disponible ?? false"
+      placeholder="Disponible"
+      classNameLabel="text-black"
+    />
+    <div class="flex flex-col w-full">
+      <label class="font-semibold w-full">Categorias</label>
+      @for(categoria of comidaDetails()?.categorias ?? []; track categoria.id){
+      <span
+        class="flex flex-col border border-slate-300 bg-slate-100 px-[11px] py-2 rounded-3xl mt-2 max-w-max font-semibold text-sm"
+      >
+        <p>
+          {{ categoria.nombre }}
+        </p>
+        <p class="text-slate-300">
+          {{ categoria.descripcion }}
+        </p>
+      </span>
+      }
+    </div>
+
+    <span class="border h-px col-span-2 border-[#E6E9EE]"></span>
+
+    <label class="font-semibold col-span-2">Resumen del Plato</label>
+
+    <div class="space-y-0.5 font-semibold">
+      <label class="text-[#94A3B8]">Cantidad de Pedidos</label>
+      <p>{{ comidaDetails()?.cantidadPedidos }} pedidos</p>
+    </div>
+    <div class="space-y-0.5 font-semibold">
+      <label class="text-[#94A3B8]">Ventas Totales</label>
+      <p>{{ comidaDetails()?.ventasTotales }} ventas</p>
+    </div>
+
+    <div class="space-y-0.5 font-semibold">
+      <label class="text-[#94A3B8]">Ganancia Total</label>
+      <p>${{ comidaDetails()?.gananciaTotal }}</p>
+    </div>
   </app-details>
 </section>

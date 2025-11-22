@@ -8,10 +8,22 @@ import { Title } from '../../../components/ui/title/title';
 import { Button } from '../../../components/ui/button/button';
 import { LucideAngularModule, PencilLine } from 'lucide-angular';
 import { Details } from '../../../components/ui/details/details';
+import { InputComponent } from '../../../components/ui/input/input';
+import { TextArea } from '../../../components/ui/text-area/text-area';
+import { Checkbox } from '../../../components/ui/checkbox/checkbox';
 
 @Component({
   selector: 'app-detalle-comida',
-  imports: [Title, Button, RouterLink, LucideAngularModule, Details],
+  imports: [
+    Title,
+    Button,
+    RouterLink,
+    LucideAngularModule,
+    Details,
+    InputComponent,
+    TextArea,
+    Checkbox,
+  ],
   templateUrl: './detalle-comida.html',
 })
 export class DetalleComida implements OnInit {

@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputControl, InputError } from '../../../interfaces/input.interface';
+import { cx } from '../../../utils/cx';
 
 @Component({
   selector: 'app-text-area',
@@ -21,10 +22,11 @@ export class TextArea {
   @Input() control!: InputControl;
   @Input() errors: InputError[] = [];
 
-  value = '';
-  disabled = false;
+  @Input() value = '';
+  @Input() disabled = false;
   onChange: (value: string) => void = () => {};
   onTouch: () => void = () => {};
+  cx = cx;
 
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;

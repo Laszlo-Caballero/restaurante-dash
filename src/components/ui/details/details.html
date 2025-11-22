@@ -4,5 +4,7 @@
     <p class="text-[#94A3B8]">{{ subtitle }}</p>
   </header>
 
-  <ng-content />
+  <div [className]="cx('mt-4 flex flex-col gap-4', childrenClassName)">
+    <ng-content></ng-content>
+  </div>
 </section>
