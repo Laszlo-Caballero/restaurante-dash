@@ -16,9 +16,17 @@
       </app-bagde>
       }
     </ng-template>
+
+    <ng-template #actions let-row>
+      <app-button className="bg-red-600 hover:bg-red-700 py-1" (click)="onDeleteUser(row)">
+        Eliminar
+      </app-button>
+    </ng-template>
   </app-table>
 </div>
 
 @if(isLoading()){
 <app-load />
+} @if(isOpenModal()){
+<app-eliminar-usuario [user]="selectedUser()!" [onCloseModal]="onCloseModal" />
 }

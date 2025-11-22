@@ -11,10 +11,12 @@ import { parseDate } from '@/utils/parseDate';
 import { Table } from '@/components/ui/table/table';
 import { Bagde } from '@/components/ui/bagde/bagde';
 import { Shield, UserIcon, LucideAngularModule } from 'lucide-angular';
+import { Button } from '@/components/ui/button/button';
+import { EliminarUsuario } from '@/modules/usuarios/eliminar-usuario/eliminar-usuario';
 
 @Component({
   selector: 'app-usuarios-page',
-  imports: [Load, Title, Table, Bagde, LucideAngularModule],
+  imports: [Load, Title, Table, Bagde, LucideAngularModule, Button, EliminarUsuario],
   templateUrl: './usuarios-page.html',
 })
 export class UsuariosPage implements OnInit {
@@ -22,12 +24,15 @@ export class UsuariosPage implements OnInit {
   authService = inject(AuthService);
 
   @ViewChild('role', { static: true }) roleTemplate!: TemplateRef<any>;
+  @ViewChild('actions', { static: true }) actionsTemplate!: TemplateRef<any>;
 
   ShieldIcon = Shield;
   UserIcon = UserIcon;
 
   users = signal<ResponseUsuarios[]>([]);
   isLoading = signal(false);
+  isOpenModal = signal(false);
+  selectedUser = signal<ResponseUsuarios | null>(null);
 
   columns = signal<ColumnDef<ResponseUsuarios>[]>([
     {
@@ -62,8 +67,23 @@ export class UsuariosPage implements OnInit {
         header: 'Rol',
         cellTemplate: this.roleTemplate,
       },
+      {
+        header: 'Acciones',
+        cellTemplate: this.actionsTemplate,
+      },
     ]);
   }
+
+  onDeleteUser(user: ResponseUsuarios) {
+    this.selectedUser.set(user);
+    this.isOpenModal.set(true);
+  }
+
+  onCloseModal = () => {
+    this.isOpenModal.set(false);
+    this.selectedUser.set(null);
+    this.loadUsers();
+  };
 
   loadUsers() {
     this.isLoading.set(true);

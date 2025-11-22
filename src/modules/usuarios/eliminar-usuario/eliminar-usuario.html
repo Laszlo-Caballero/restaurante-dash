@@ -1,0 +1,29 @@
+<app-modal>
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Eliminar Usuario</h2>
+
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <div class="mt-4">
+    <p>
+      ¿Estás seguro de que deseas eliminar al usuario <strong>{{ user.nombre }}</strong
+      >? Esta acción no se puede deshacer.
+    </p>
+  </div>
+  <footer class="flex justify-end w-full gap-x-2">
+    <app-button
+      className="bg-transparent text-black border border-slate-300"
+      (click)="onCloseModal()"
+    >
+      Cancelar
+    </app-button>
+    <app-button (click)="deleteUser()"> Eliminar Usuario </app-button>
+  </footer>
+</app-modal>
+
+@if(isLoading){
+<app-load />
+}
