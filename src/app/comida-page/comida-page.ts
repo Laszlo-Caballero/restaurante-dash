@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Title } from '../../components/ui/title/title';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule, Plus } from 'lucide-angular';
 import { ComidaResponse, ResponseApi } from '../../interfaces/response.interface';
 import { Table } from '../../components/ui/table/table';
@@ -8,6 +8,7 @@ import { ColumnDef } from '../../interfaces/table.interface';
 import { HttpService } from '../../services/http/http-service';
 import { AuthService } from '../../services/auth/auth-service';
 import { toast } from 'ngx-sonner';
+import { Load } from '../../components/ui/load/load';
 
 class ImageUrl {
   static readonly url = 'http://localhost:8080/images';
@@ -15,12 +16,15 @@ class ImageUrl {
 
 @Component({
   selector: 'app-comida-page',
-  imports: [LucideAngularModule, Title, RouterLink, Table],
+  imports: [LucideAngularModule, Title, RouterLink, Table, Load],
   templateUrl: './comida-page.html',
 })
-export class ComidaPage implements OnInit {
+export class ComidaPage implements OnInit, AfterViewInit {
   httpService = inject(HttpService);
   authService = inject(AuthService);
+  router = inject(Router);
+
+  @ViewChild('actions', { static: true }) accionesTemplate!: TemplateRef<any>;
 
   readonly PlusIcon = Plus;
 
@@ -73,6 +77,12 @@ export class ComidaPage implements OnInit {
 
   ngOnInit() {
     this.loadComidas();
+  }
+  ngAfterViewInit() {
+    this.columns.push({
+      header: 'Acciones',
+      cellTemplate: this.accionesTemplate,
+    });
   }
 
   loadComidas() {
