@@ -1,6 +1,24 @@
 <app-title title="Usuarios" subtitle="Gestión completa de los usuarios registrados en el sistema">
 </app-title>
 
+<div class="rounded-xl shadow-xl">
+  <app-table [columns]="columns()" [data]="users()">
+    <ng-template #role let-row>
+      @if(row.role === "ADMIN"){
+      <app-bagde className="justify-start">
+        <lucide-angular [img]="ShieldIcon" />
+        Administrador
+      </app-bagde>
+      }@else {
+      <app-bagde className="justify-start">
+        <lucide-angular [img]="UserIcon" />
+        Usuario
+      </app-bagde>
+      }
+    </ng-template>
+  </app-table>
+</div>
+
 @if(isLoading()){
 <app-load />
 }
