@@ -7,8 +7,7 @@
  * The Next projects will have this file in .gitignore.
  * If you want to ignore it, add it to your .gitignore file.
  */
-
 export const ENV = {
-  apiUrl: 'http://localhost:8080/api',
-  imagesUrl: 'http://localhost:8080/images',
+    "apiUrl": "http://localhost:8080/api/v1",
+    "imagesUrl": "http://localhost:8080/images"
 };
