@@ -12,9 +12,9 @@
   </div>
 </app-title>
 
-<section class="flex items-center h-full mt-4">
+<section class="grid grid-cols-4 h-full mt-4 gap-2">
   <app-details
-    class="w-full h-full"
+    class="col-span-3"
     className="h-full"
     title="Información del Plato"
     subtitle="Detalles completos del plato seleccionado"
@@ -84,5 +84,35 @@
       <label class="text-[#94A3B8]">Ganancia Total</label>
       <p>${{ comidaDetails()?.gananciaTotal }}</p>
     </div>
+  </app-details>
+
+  <app-details
+    class="col-span-1"
+    className="h-full"
+    title="Resumen Rapido"
+    subtitle="Detalles completos del plato seleccionado"
+  >
+    <img [src]="getUrlImagen()" alt="Imagen del Plato" class="w-full h-auto rounded-md" />
+    <span class="flex font-semibold items-center w-full justify-between">
+      <p class="text-[#94A3B8]">Plato</p>
+      <p>{{ comidaDetails()?.nombre }}</p>
+    </span>
+    <span class="flex font-semibold items-center w-full justify-between">
+      <p class="text-[#94A3B8]">Estado</p>
+      <p>{{ comidaDetails()?.disponible ? 'Disponible' : 'No Disponible' }}</p>
+    </span>
+    <span class="flex font-semibold items-center w-full justify-between">
+      <p class="text-[#94A3B8]">Precio</p>
+      <p>${{ comidaDetails()?.precio }}</p>
+    </span>
+    <span class="flex font-semibold items-center w-full justify-between">
+      <p class="text-[#94A3B8]">Cantidad de Pedidos</p>
+      <p>{{ comidaDetails()?.cantidadPedidos }}</p>
+    </span>
+
+    <span class="flex font-semibold items-center w-full justify-between">
+      <p class="text-[#94A3B8]">Ganancia Total</p>
+      <p>${{ comidaDetails()?.gananciaTotal }}</p>
+    </span>
   </app-details>
 </section>

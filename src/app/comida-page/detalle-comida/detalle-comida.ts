@@ -11,6 +11,7 @@ import { Details } from '../../../components/ui/details/details';
 import { InputComponent } from '../../../components/ui/input/input';
 import { TextArea } from '../../../components/ui/text-area/text-area';
 import { Checkbox } from '../../../components/ui/checkbox/checkbox';
+import { ENV } from '../../../config/env';
 
 @Component({
   selector: 'app-detalle-comida',
@@ -70,5 +71,9 @@ export class DetalleComida implements OnInit {
           this.isLoading.set(false);
         },
       });
+  }
+
+  getUrlImagen(): string {
+    return `${ENV.imagesUrl}/${this.comidaDetails()?.recurso.nombre}`;
   }
 }
