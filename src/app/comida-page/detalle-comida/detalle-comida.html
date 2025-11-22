@@ -1,0 +1,23 @@
+<app-title title="Detalle del Plato" subtitle="Información completa del plato seleccionado">
+  <div class="flex items-center gap-2">
+    <app-button className="border border-slate-300 text-black bg-transparent">
+      <a [routerLink]="['/comidas']"> Volver a la lista</a>
+    </app-button>
+    <app-button>
+      <a [routerLink]="['/comidas/editar', comidaId()]" class="flex items-center">
+        <lucide-angular [img]="EditIcon" class="mr-1" />
+        Editar Plato
+      </a>
+    </app-button>
+  </div>
+</app-title>
+
+<section class="flex items-center h-full mt-4">
+  <app-details
+    class="w-full h-full"
+    className="h-full"
+    title="Información del Plato"
+    subtitle="Detalles completos del plato seleccionado"
+  >
+  </app-details>
+</section>

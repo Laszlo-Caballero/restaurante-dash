@@ -1,0 +1,8 @@
+<section [className]="cx('border border-slate-300 rounded-3xl p-[17px] flex flex-col', className)">
+  <header class="flex flex-col gap-1 font-semibold">
+    <h2>{{ title }}</h2>
+    <p class="text-[#94A3B8]">{{ subtitle }}</p>
+  </header>
+
+  <ng-content />
+</section>

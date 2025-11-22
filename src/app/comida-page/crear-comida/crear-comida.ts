@@ -19,6 +19,7 @@ import { GaleryModalValue } from '../../../components/shared/galery-modal/value.
 import { LucideAngularModule, Upload } from 'lucide-angular';
 import { GaleryModal } from '../../../components/shared/galery-modal/galery-modal';
 import { toast } from 'ngx-sonner';
+import { ENV } from '../../../config/env';
 
 @Component({
   selector: 'app-crear-comida',
@@ -39,7 +40,7 @@ export class CrearComida implements OnInit {
   private router = inject(Router);
   private httpClient = inject(HttpService);
   private authService = inject(AuthService);
-  private imageUrl = 'http://localhost:8080/images';
+  private imageUrl = ENV.imagesUrl;
   cx = cx;
 
   comidaForm = new FormGroup({

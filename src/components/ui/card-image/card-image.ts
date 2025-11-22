@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input } from '@angular/core';
 import { Image, LucideAngularModule } from 'lucide-angular';
 import { parseTitle } from '../../../utils/parseTitleImage';
 import { cx } from '../../../utils/cx';
+import { ENV } from '../../../config/env';
 
 @Component({
   selector: 'app-card-image',
@@ -9,7 +10,7 @@ import { cx } from '../../../utils/cx';
   templateUrl: './card-image.html',
 })
 export class CardImage {
-  private imageUrl = 'http://localhost:8080/images';
+  private imageUrl = ENV.imagesUrl;
 
   @Input({ required: true }) imageTitle = '';
   @Input({ required: true }) uploadImage = '';

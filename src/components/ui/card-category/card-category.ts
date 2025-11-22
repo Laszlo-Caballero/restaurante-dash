@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Button } from '../button/button';
 import { Pen, LucideAngularModule } from 'lucide-angular';
+import { ENV } from '../../../config/env';
 
 @Component({
   selector: 'app-card-category',
@@ -8,7 +9,7 @@ import { Pen, LucideAngularModule } from 'lucide-angular';
   templateUrl: './card-category.html',
 })
 export class CardCategory {
-  private imageUrl = 'http://localhost:8080/images';
+  private imageUrl = ENV.imagesUrl;
   @Input({ required: true }) categoryName!: string;
   @Input({ required: true }) categoryImageUrl!: string;
   @Input({ required: true }) categoryDescription!: string;

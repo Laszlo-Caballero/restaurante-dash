@@ -9,17 +9,14 @@ import { HttpService } from '../../services/http/http-service';
 import { AuthService } from '../../services/auth/auth-service';
 import { toast } from 'ngx-sonner';
 import { Load } from '../../components/ui/load/load';
-
-class ImageUrl {
-  static readonly url = 'http://localhost:8080/images';
-}
+import { ENV } from '../../config/env';
 
 @Component({
   selector: 'app-comida-page',
   imports: [LucideAngularModule, Title, RouterLink, Table, Load],
   templateUrl: './comida-page.html',
 })
-export class ComidaPage implements OnInit, AfterViewInit {
+export class ComidaPage implements OnInit {
   httpService = inject(HttpService);
   authService = inject(AuthService);
   router = inject(Router);
@@ -36,7 +33,7 @@ export class ComidaPage implements OnInit, AfterViewInit {
     {
       header: 'Imagen',
       cell({ row }) {
-        return `<img src="${ImageUrl.url}/${row.recurso.nombre}" alt="${row.nombre}" class="w-12 h-12 object-cover rounded-lg"/>`;
+        return `<img src="${ENV.imagesUrl}/${row.recurso.nombre}" alt="${row.nombre}" class="w-12 h-12 object-cover rounded-lg"/>`;
       },
     },
     {
@@ -77,8 +74,6 @@ export class ComidaPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loadComidas();
-  }
-  ngAfterViewInit() {
     this.columns.push({
       header: 'Acciones',
       cellTemplate: this.accionesTemplate,

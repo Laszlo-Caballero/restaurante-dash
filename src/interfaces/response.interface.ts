@@ -1,6 +1,7 @@
 export interface ComidaResponse {
   comidaId: number;
   nombre: string;
+  slug: string;
   descripcion: string;
   precio: number;
   disponible: boolean;

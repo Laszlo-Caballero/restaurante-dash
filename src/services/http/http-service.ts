@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { OptionsHttp } from './httpType';
+import { ENV } from '../../config/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  private baseUrl = 'http://localhost:8080/api/v1';
+  private baseUrl = ENV.apiUrl;
   private http = inject(HttpClient);
 
   get<R>(path: string, options?: OptionsHttp) {

@@ -16,6 +16,7 @@ import {
   ResponseCategoria,
   ResponseRecurso,
 } from '../../../interfaces/response.interface';
+import { ENV } from '../../../config/env';
 
 @Component({
   selector: 'app-create-categoria',
@@ -36,7 +37,7 @@ export class CreateCategoria {
 
   @Input({ required: true }) onCloseModal!: () => void;
 
-  private imageUrl = 'http://localhost:8080/images';
+  private imageUrl = ENV.imagesUrl;
 
   isGaleryModalOpen = false;
   isLoading = false;

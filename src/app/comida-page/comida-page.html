@@ -14,12 +14,14 @@
 <div class="rounded-xl shadow-xl">
   <app-table [data]="data" [columns]="columns">
     <ng-template #actions let-row>
-      <a
-        [routerLink]="['/comidas/editar-comida', row.comidaId]"
-        class="text-blue-600 font-semibold hover:underline"
-        >Editar</a
-      >
-      <a [routerLink]="['/comidas/detalles', row.comidaId]"> Detalles </a>
+      <div class="flex items-center gap-2">
+        <a
+          [routerLink]="['/comidas/editar-comida', row.comidaId]"
+          class="text-blue-600 font-semibold hover:underline"
+          >Editar</a
+        >
+        <a [routerLink]="['/comidas/detalles', row.comidaId]"> Detalles </a>
+      </div>
     </ng-template>
   </app-table>
 </div>

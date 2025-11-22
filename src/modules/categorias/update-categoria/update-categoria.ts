@@ -17,6 +17,7 @@ import { InputComponent } from '../../../components/ui/input/input';
 import { TextArea } from '../../../components/ui/text-area/text-area';
 import { Load } from '../../../components/ui/load/load';
 import { toast } from 'ngx-sonner';
+import { ENV } from '../../../config/env';
 
 @Component({
   selector: 'app-update-categoria',
@@ -39,7 +40,7 @@ export class UpdateCategoria implements OnInit {
   @Input({ required: true }) onCloseModal!: () => void;
   @Input({ required: true }) categoriaId!: number;
 
-  private imageUrl = 'http://localhost:8080/images';
+  private imageUrl = ENV.imagesUrl;
 
   isGaleryModalOpen = false;
   isLoading = false;

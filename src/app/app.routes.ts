@@ -8,6 +8,7 @@ import { GaleriaPage } from './galeria-page/galeria-page';
 import { adminGuard } from '../guards/admin-guard';
 import { CrearComida } from './comida-page/crear-comida/crear-comida';
 import { CategoriasPage } from './categorias-page/categorias-page';
+import { DetalleComida } from './comida-page/detalle-comida/detalle-comida';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'categorias',
         component: CategoriasPage,
+      },
+      {
+        path: 'comidas/detalles/:id',
+        component: DetalleComida,
       },
     ],
   },
