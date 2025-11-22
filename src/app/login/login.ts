@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { InputComponent } from '../../components/ui/input/input';
-import { Button } from '../../components/ui/button/button';
+import { InputComponent } from '@/components/ui/input/input';
+import { Button } from '@/components/ui/button/button';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputError } from '../../interfaces/input.interface';
-import { AuthService } from '../../services/auth/auth-service';
+import { InputError } from '@/interfaces/input.interface';
+import { AuthService } from '@/services/auth/auth-service';
 
 @Component({
   selector: 'app-login',

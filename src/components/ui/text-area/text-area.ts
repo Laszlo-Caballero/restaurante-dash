@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputControl, InputError } from '../../../interfaces/input.interface';
-import { cx } from '../../../utils/cx';
+import { InputControl, InputError } from '@/interfaces/input.interface';
+import { cx } from '@/utils/cx';
 
 @Component({
   selector: 'app-text-area',

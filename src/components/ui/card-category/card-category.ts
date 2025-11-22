@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Button } from '../button/button';
 import { Pen, LucideAngularModule } from 'lucide-angular';
-import { ENV } from '../../../config/env';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-card-category',

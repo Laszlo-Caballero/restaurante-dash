@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
-import { TabService } from '../../../services/tab/tab-service';
-import { cx } from '../../../utils/cx';
+import { TabService } from '@/services/tab/tab-service';
+import { cx } from '@/utils/cx';
 
 @Component({
   selector: 'app-tab-button',

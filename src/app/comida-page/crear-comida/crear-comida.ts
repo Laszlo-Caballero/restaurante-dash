@@ -1,25 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Title } from '../../../components/ui/title/title';
-import { Button } from '../../../components/ui/button/button';
+import { Title } from '@/components/ui/title/title';
+import { Button } from '@/components/ui/button/button';
 import { Router } from '@angular/router';
-import { InputComponent } from '../../../components/ui/input/input';
-import { TextArea } from '../../../components/ui/text-area/text-area';
-import { Checkbox } from '../../../components/ui/checkbox/checkbox';
-import { HttpService } from '../../../services/http/http-service';
-import { AuthService } from '../../../services/auth/auth-service';
-import {
-  ResponseApi,
-  ResponseCategoria,
-  ResponseRecurso,
-} from '../../../interfaces/response.interface';
-import { Load } from '../../../components/ui/load/load';
+import { InputComponent } from '@/components/ui/input/input';
+import { TextArea } from '@/components/ui/text-area/text-area';
+import { Checkbox } from '@/components/ui/checkbox/checkbox';
+import { HttpService } from '@/services/http/http-service';
+import { AuthService } from '@/services/auth/auth-service';
+import { ResponseApi, ResponseCategoria, ResponseRecurso } from '@/interfaces/response.interface';
+import { Load } from '@/components/ui/load/load';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { cx } from '../../../utils/cx';
-import { GaleryModalValue } from '../../../components/shared/galery-modal/value.interface';
+import { cx } from '@/utils/cx';
+import { GaleryModalValue } from '@/components/shared/galery-modal/value.interface';
 import { LucideAngularModule, Upload } from 'lucide-angular';
-import { GaleryModal } from '../../../components/shared/galery-modal/galery-modal';
+import { GaleryModal } from '@/components/shared/galery-modal/galery-modal';
 import { toast } from 'ngx-sonner';
-import { ENV } from '../../../config/env';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-crear-comida',

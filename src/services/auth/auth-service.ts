@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { User, UserInput } from '../../interfaces/auth.interface';
+import { User, UserInput } from '@/interfaces/auth.interface';
 import { HttpService } from '../http/http-service';
 import { Router } from '@angular/router';
 import { toast } from 'ngx-sonner';
-import { ResponseApi } from '../../interfaces/response.interface';
-import { Role } from '../../enum/Role';
+import { ResponseApi } from '@/interfaces/response.interface';
+import { Role } from '@/enum/Role';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({

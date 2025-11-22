@@ -1,17 +1,17 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { HttpService } from '../../../services/http/http-service';
-import { ComidaResponse, ResponseApi } from '../../../interfaces/response.interface';
-import { AuthService } from '../../../services/auth/auth-service';
+import { HttpService } from '@/services/http/http-service';
+import { ComidaResponse, ResponseApi } from '@/interfaces/response.interface';
+import { AuthService } from '@/services/auth/auth-service';
 import { toast } from 'ngx-sonner';
-import { Title } from '../../../components/ui/title/title';
-import { Button } from '../../../components/ui/button/button';
+import { Title } from '@/components/ui/title/title';
+import { Button } from '@/components/ui/button/button';
 import { LucideAngularModule, PencilLine } from 'lucide-angular';
-import { Details } from '../../../components/ui/details/details';
-import { InputComponent } from '../../../components/ui/input/input';
-import { TextArea } from '../../../components/ui/text-area/text-area';
-import { Checkbox } from '../../../components/ui/checkbox/checkbox';
-import { ENV } from '../../../config/env';
+import { Details } from '@/components/ui/details/details';
+import { InputComponent } from '@/components/ui/input/input';
+import { TextArea } from '@/components/ui/text-area/text-area';
+import { Checkbox } from '@/components/ui/checkbox/checkbox';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-detalle-comida',

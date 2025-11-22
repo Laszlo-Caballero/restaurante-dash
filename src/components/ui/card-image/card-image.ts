@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input } from '@angular/core';
 import { Image, LucideAngularModule } from 'lucide-angular';
-import { parseTitle } from '../../../utils/parseTitleImage';
-import { cx } from '../../../utils/cx';
-import { ENV } from '../../../config/env';
+import { parseTitle } from '@/utils/parseTitleImage';
+import { cx } from '@/utils/cx';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-card-image',

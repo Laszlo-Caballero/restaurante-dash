@@ -1,22 +1,18 @@
 import { Component, inject, Input } from '@angular/core';
-import { Modal } from '../../../components/ui/modal/modal';
+import { Modal } from '@/components/ui/modal/modal';
 import { LucideAngularModule, Upload, X } from 'lucide-angular';
-import { InputComponent } from '../../../components/ui/input/input';
-import { TextArea } from '../../../components/ui/text-area/text-area';
-import { Button } from '../../../components/ui/button/button';
+import { InputComponent } from '@/components/ui/input/input';
+import { TextArea } from '@/components/ui/text-area/text-area';
+import { Button } from '@/components/ui/button/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputError } from '../../../interfaces/input.interface';
-import { GaleryModalValue } from '../../../components/shared/galery-modal/value.interface';
-import { GaleryModal } from '../../../components/shared/galery-modal/galery-modal';
+import { InputError } from '@/interfaces/input.interface';
+import { GaleryModalValue } from '@/components/shared/galery-modal/value.interface';
+import { GaleryModal } from '@/components/shared/galery-modal/galery-modal';
 import { toast } from 'ngx-sonner';
-import { HttpService } from '../../../services/http/http-service';
-import { AuthService } from '../../../services/auth/auth-service';
-import {
-  ResponseApi,
-  ResponseCategoria,
-  ResponseRecurso,
-} from '../../../interfaces/response.interface';
-import { ENV } from '../../../config/env';
+import { HttpService } from '@/services/http/http-service';
+import { AuthService } from '@/services/auth/auth-service';
+import { ResponseApi, ResponseCategoria, ResponseRecurso } from '@/interfaces/response.interface';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-create-categoria',

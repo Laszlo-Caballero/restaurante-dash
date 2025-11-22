@@ -9,6 +9,7 @@ import { adminGuard } from '../guards/admin-guard';
 import { CrearComida } from './comida-page/crear-comida/crear-comida';
 import { CategoriasPage } from './categorias-page/categorias-page';
 import { DetalleComida } from './comida-page/detalle-comida/detalle-comida';
+import { UsuariosPage } from './usuarios-page/usuarios-page';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
       {
         path: 'comidas/nueva-comida',
         component: CrearComida,
+      },
+      {
+        path: 'usuarios',
+        component: UsuariosPage,
       },
     ],
   },

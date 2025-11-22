@@ -1,15 +1,15 @@
 import { AfterViewInit, Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Title } from '../../components/ui/title/title';
+import { Title } from '@/components/ui/title/title';
 import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule, Plus } from 'lucide-angular';
-import { ComidaResponse, ResponseApi } from '../../interfaces/response.interface';
-import { Table } from '../../components/ui/table/table';
-import { ColumnDef } from '../../interfaces/table.interface';
-import { HttpService } from '../../services/http/http-service';
-import { AuthService } from '../../services/auth/auth-service';
+import { ComidaResponse, ResponseApi } from '@/interfaces/response.interface';
+import { Table } from '@/components/ui/table/table';
+import { ColumnDef } from '@/interfaces/table.interface';
+import { HttpService } from '@/services/http/http-service';
+import { AuthService } from '@/services/auth/auth-service';
 import { toast } from 'ngx-sonner';
-import { Load } from '../../components/ui/load/load';
-import { ENV } from '../../config/env';
+import { Load } from '@/components/ui/load/load';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-comida-page',

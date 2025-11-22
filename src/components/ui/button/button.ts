@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input } from '@angular/core';
-import { cx } from '../../../utils/cx';
+import { cx } from '@/utils/cx';
 
 @Component({
   selector: 'app-button',

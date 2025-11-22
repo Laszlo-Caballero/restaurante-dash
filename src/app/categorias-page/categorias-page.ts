@@ -1,18 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth-service';
-import { Title } from '../../components/ui/title/title';
-import { Tooltip } from '../../components/ui/tooltip/tooltip';
-import { PositionTooltip } from '../../components/ui/tooltip/enum';
-import { Button } from '../../components/ui/button/button';
+import { AuthService } from '@/services/auth/auth-service';
+import { Title } from '@/components/ui/title/title';
+import { Tooltip } from '@/components/ui/tooltip/tooltip';
+import { PositionTooltip } from '@/components/ui/tooltip/enum';
+import { Button } from '@/components/ui/button/button';
 import { LucideAngularModule, Plus, Upload, X } from 'lucide-angular';
-import { HttpService } from '../../services/http/http-service';
-import { ResponseApi, ResponseCategoria } from '../../interfaces/response.interface';
+import { HttpService } from '@/services/http/http-service';
+import { ResponseApi, ResponseCategoria } from '@/interfaces/response.interface';
 import { toast } from 'ngx-sonner';
-import { Load } from '../../components/ui/load/load';
-import { CardCategory } from '../../components/ui/card-category/card-category';
+import { Load } from '@/components/ui/load/load';
+import { CardCategory } from '@/components/ui/card-category/card-category';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateCategoria } from '../../modules/categorias/create-categoria/create-categoria';
-import { UpdateCategoria } from '../../modules/categorias/update-categoria/update-categoria';
+import { CreateCategoria } from '@/modules/categorias/create-categoria/create-categoria';
+import { UpdateCategoria } from '@/modules/categorias/update-categoria/update-categoria';
 
 @Component({
   selector: 'app-categorias-page',

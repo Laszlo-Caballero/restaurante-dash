@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { OptionsHttp } from './httpType';
-import { ENV } from '../../config/env';
+import { ENV } from '@/config/env';
 
 @Injectable({
   providedIn: 'root',

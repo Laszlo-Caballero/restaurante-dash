@@ -1,23 +1,19 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth/auth-service';
-import { HttpService } from '../../../services/http/http-service';
+import { AuthService } from '@/services/auth/auth-service';
+import { HttpService } from '@/services/http/http-service';
 import { Upload, X, LucideAngularModule } from 'lucide-angular';
-import { GaleryModalValue } from '../../../components/shared/galery-modal/value.interface';
+import { GaleryModalValue } from '@/components/shared/galery-modal/value.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputError } from '../../../interfaces/input.interface';
-import {
-  ResponseApi,
-  ResponseCategoria,
-  ResponseRecurso,
-} from '../../../interfaces/response.interface';
-import { GaleryModal } from '../../../components/shared/galery-modal/galery-modal';
-import { Button } from '../../../components/ui/button/button';
-import { Modal } from '../../../components/ui/modal/modal';
-import { InputComponent } from '../../../components/ui/input/input';
-import { TextArea } from '../../../components/ui/text-area/text-area';
-import { Load } from '../../../components/ui/load/load';
+import { InputError } from '@/interfaces/input.interface';
+import { ResponseApi, ResponseCategoria, ResponseRecurso } from '@/interfaces/response.interface';
+import { GaleryModal } from '@/components/shared/galery-modal/galery-modal';
+import { Button } from '@/components/ui/button/button';
+import { Modal } from '@/components/ui/modal/modal';
+import { InputComponent } from '@/components/ui/input/input';
+import { TextArea } from '@/components/ui/text-area/text-area';
+import { Load } from '@/components/ui/load/load';
 import { toast } from 'ngx-sonner';
-import { ENV } from '../../../config/env';
+import { ENV } from '@/config/env';
 
 @Component({
   selector: 'app-update-categoria',
