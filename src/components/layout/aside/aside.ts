@@ -4,6 +4,7 @@ import {
   LayoutGrid,
   LogOut,
   LucideAngularModule,
+  Table,
   Tags,
   User,
   Utensils,
@@ -28,6 +29,7 @@ export class Aside implements AfterViewInit {
   readonly UserIcon = User;
   readonly GaleryIcon = Image;
   readonly TagsIcon = Tags;
+  readonly TableIcon = Table;
 
   authService = inject(AuthService);
   isOpen = false;
