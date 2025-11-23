@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import {
+  Hamburger,
   Image,
   LayoutGrid,
   LogOut,
@@ -19,7 +20,7 @@ import { Link } from '@/components/ui/link/link';
 @Component({
   selector: 'app-aside',
   standalone: true,
-  imports: [LucideAngularModule, Link, RouterLink, FormsModule],
+  imports: [Link, RouterLink, FormsModule, LucideAngularModule],
   templateUrl: './aside.html',
 })
 export class Aside implements AfterViewInit {
@@ -30,6 +31,7 @@ export class Aside implements AfterViewInit {
   readonly GaleryIcon = Image;
   readonly TagsIcon = Tags;
   readonly TableIcon = Table;
+  readonly OrdenesIcon = Hamburger;
 
   authService = inject(AuthService);
   isOpen = false;

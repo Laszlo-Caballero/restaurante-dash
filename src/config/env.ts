@@ -9,5 +9,6 @@
  */
 export const ENV = {
     "apiUrl": "http://localhost:8080/api/v1",
-    "imagesUrl": "http://localhost:8080/images"
+    "imagesUrl": "http://localhost:8080/images",
+    "websocketUrl": "http://localhost:8080/ws"
 };

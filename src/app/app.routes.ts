@@ -11,6 +11,7 @@ import { CategoriasPage } from './categorias-page/categorias-page';
 import { DetalleComida } from './comida-page/detalle-comida/detalle-comida';
 import { UsuariosPage } from './usuarios-page/usuarios-page';
 import { MesasPage } from './mesas-page/mesas-page';
+import { OrdenesPage } from './ordenes-page/ordenes-page';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,10 @@ export const routes: Routes = [
       {
         path: 'mesas',
         component: MesasPage,
+      },
+      {
+        path: 'ordenes',
+        component: OrdenesPage,
       },
     ],
   },

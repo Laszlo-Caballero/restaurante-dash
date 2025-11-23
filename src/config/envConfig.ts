@@ -7,6 +7,7 @@ function generateEnv() {
   const env = {
     apiUrl: process.env['API_URL'] || 'http://localhost:8080/api/v1',
     imagesUrl: process.env['IMAGES_URL'] || 'http://localhost:8080/images',
+    websocketUrl: process.env['WEBSOCKET_URL'] || 'http://localhost:8080/ws',
   };
 
   fs.writeFile(
