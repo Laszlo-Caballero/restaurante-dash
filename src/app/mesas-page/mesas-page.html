@@ -1,5 +1,12 @@
+<app-title
+  title="Gestión de Mesas"
+  subtitle="Administra las mesas de tu restaurante de manera eficiente."
+>
+  <app-button (click)="openCreateMesa()"> Añadir Nueva Mesa </app-button>
+</app-title>
+
 <div class="flex flex-col gap-y-5 p-4">
-  <div class="grid grid-cols-4 gap-4">
+  <header class="grid grid-cols-4 gap-4">
     <div class="p-4 rounded-2xl border flex flex-col border-gray-400">
       <p class="font-semibold text-gray-400">Mesas Totales</p>
       <h1 class="text-2xl font-bold">32</h1>
@@ -16,14 +23,21 @@
       <p class="font-semibold text-gray-400">Reservados</p>
       <h1 class="text-2xl font-bold">2</h1>
     </div>
-  </div>
-  <div class="p-4 rounded-2xl border flex flex-col border-gray-400">
-    <div class="grid grid-cols-4 ap-4">
-      <div class="p-4 rounded-2xl border flex flex-col border-gray-400">
-        <h2 class="font-semibold bg-gray-100 p-4 rounded-2xl text-center">T-01</h2>
-        <h1 class="font-semibold p-1">2 pax</h1>
-        <p class="font-semibold text-gray-400">Disponible</p>
-      </div>
-    </div>
-  </div>
+  </header>
+
+  <section class="w-full grid grid-cols-4 gap-4 border border-slate-300 rounded-3xl p-4">
+    @for(mesa of mesas(); track mesa.mesaId){
+    <app-card-table
+      [tableNumber]="mesa.numeroMesa"
+      [capacity]="mesa.capacidad"
+      [status]="mesa.disponible"
+    />
+    }
+  </section>
 </div>
+
+@if(isLoading()){
+<app-load />
+} @if(isOpenCreateMesa()){
+<app-create-mesa [onClose]="closeCreateMesa" />
+}

@@ -1,0 +1,38 @@
+<app-modal (click)="onClose()">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Crear Categoria</h2>
+
+    <button (click)="onClose()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <form class="flex flex-col gap-y-3" [formGroup]="mesaForm" (ngSubmit)="submitForm()">
+    <app-input
+      id="numeroMesa"
+      label="Número de Mesa"
+      placeholder="Ingrese el número de la mesa"
+      formControlName="numeroMesa"
+      [control]="mesaForm.get('numeroMesa')"
+      [errors]="numeroMesaErrors"
+    />
+    <app-input
+      id="capacidad"
+      label="Capacidad"
+      placeholder="Ingrese la capacidad de la mesa"
+      formControlName="capacidad"
+      [control]="mesaForm.get('capacidad')"
+      [errors]="capacidadErrors"
+    />
+    <footer class="flex justify-end w-full gap-x-2">
+      <app-button className="bg-transparent text-black border border-slate-300" (click)="onClose()">
+        Cancelar
+      </app-button>
+      <app-button type="submit"> Crear Mesa </app-button>
+    </footer>
+  </form>
+</app-modal>
+
+@if(isLoading()){
+<app-load />
+}

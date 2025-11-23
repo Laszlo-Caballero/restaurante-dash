@@ -32,3 +32,19 @@ export interface ResponseRecurso {
   nombre: string;
   fechaCreacion: string;
 }
+
+export interface ResponseMesa {
+  mesaId: number;
+  numeroMesa: number;
+  capacidad: number;
+  disponible: boolean;
+  pedidos: ResponsePedido[];
+}
+
+export interface ResponsePedido {
+  pedidoId: number;
+  fechaCreacion: string;
+  metodoPago: string;
+  estado: string;
+  total: number;
+}
