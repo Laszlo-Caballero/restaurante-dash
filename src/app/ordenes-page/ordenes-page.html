@@ -1,1 +1,16 @@
-<p>ordenes-page works!</p>
+<app-title title="Ordenes Actuales" subtitle="Revisa y administra tus ordenes" />
+
+<section class="w-full mt-4 grid grid-cols-4 gap-4 border border-slate-300 rounded-3xl p-4">
+  @for(res of mesas(); track res.mesa.mesaId){
+  <app-card-table
+    [tableNumber]="res.mesa.numeroMesa"
+    [capacity]="res.mesa.capacidad"
+    [status]="res.mesa.disponible"
+    (click)="clickedMesa(res.mesa.mesaId)"
+  />
+  }
+</section>
+
+@if(isOpenCreateOrden().isOpen){
+<app-create-orden [onClose]="closeModal" [mesaId]="isOpenCreateOrden().mesaId" />
+}
