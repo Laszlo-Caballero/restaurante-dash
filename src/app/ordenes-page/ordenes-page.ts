@@ -10,6 +10,6 @@ export class OrdenesPage implements OnInit {
   websocketService = inject(WebsocketService);
 
   ngOnInit() {
-    this.websocketService.connetct();
+    this.websocketService.connect();
   }
 }

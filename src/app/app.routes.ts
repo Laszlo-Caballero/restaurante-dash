@@ -12,6 +12,7 @@ import { DetalleComida } from './comida-page/detalle-comida/detalle-comida';
 import { UsuariosPage } from './usuarios-page/usuarios-page';
 import { MesasPage } from './mesas-page/mesas-page';
 import { OrdenesPage } from './ordenes-page/ordenes-page';
+import { ChatPage } from './chat-page/chat-page';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
       {
         path: 'ordenes',
         component: OrdenesPage,
+      },
+      {
+        path: 'chat',
+        component: ChatPage,
       },
     ],
   },

@@ -1,0 +1,50 @@
+<app-title title="Chat"></app-title>
+
+<app-details
+  className="mt-4 h-[90vh]"
+  childrenClassName="h-full flex flex-col gap-2 max-h-full overflow-y-auto"
+  class="h-full"
+  title="Chat Details"
+  subtitle="Manage your chat settings here"
+>
+  <section class="h-full flex flex-col gap-4 overflow-y-auto py-2">
+    @for (message of messages(); track $index) {
+    <div
+      [className]="
+        cx(
+          'flex items-center gap-2 w-full',
+          message.sender === authService.user?.nombre && 'ml-auto flex-row-reverse items-end'
+        )
+      "
+    >
+      <span class="size-10 rounded-full border border-slate-300 flex items-center justify-center">
+        {{ message.sender.charAt(0).toUpperCase() }}
+      </span>
+
+      <div
+        [className]="
+          cx(
+            'max-w-xs p-3 rounded-lg',
+            message.sender === authService.user?.nombre
+              ? 'bg-blue-600 text-white'
+              : 'bg-slate-200 text-slate-900'
+          )
+        "
+      >
+        <p>{{ message.content }}</p>
+      </div>
+    </div>
+    }
+  </section>
+  <footer class="w-full py-2 border-t h-auto border-slate-300 flex items-center gap-2">
+    <input
+      type="text"
+      class="flex-1 p-2 border border-slate-300 rounded-lg"
+      [value]="messageContent()"
+      (input)="onChangeMessageContent($event)"
+    />
+    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg" (click)="sendMessage()">
+      Enviar
+    </button>
+  </footer>
+</app-details>
