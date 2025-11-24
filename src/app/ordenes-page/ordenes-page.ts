@@ -1,6 +1,6 @@
 import { MesasOrdenesMessage } from '@/interfaces/ordenes.interface';
 import { WebsocketService } from '@/services/websocket/websocket-service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Title } from '@/components/ui/title/title';
 import { CardTable } from '@/components/ui/card-table/card-table';
 import { CreateOrden } from '@/modules/ordenes/create-orden/create-orden';
@@ -10,7 +10,7 @@ import { CreateOrden } from '@/modules/ordenes/create-orden/create-orden';
   imports: [Title, CardTable, CreateOrden],
   templateUrl: './ordenes-page.html',
 })
-export class OrdenesPage implements OnInit {
+export class OrdenesPage implements OnInit, OnDestroy {
   websocketService = inject(WebsocketService);
   mesas = signal<MesasOrdenesMessage[]>([]);
 
@@ -39,6 +39,10 @@ export class OrdenesPage implements OnInit {
         this.websocketService.sendMessage('/app/todas-las-ordenes', {});
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.websocketService.disconnect();
   }
 
   clickedMesa(mesaId: number) {
