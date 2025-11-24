@@ -7,23 +7,38 @@
     </button>
   </header>
 
-  <section class="grid grid-cols-4">
-    @for (comida of comidas(); track comida.comidaId) {
-    <app-menu-counter
-      [comida]="comida"
-      [count]="getComidaCount(comida.comidaId)"
-      [onIncrease]="increaseCount"
-      [onDecrease]="decreaseCount"
-    />
-    }
-  </section>
+  <app-tabs class="h-full" className="p-0 h-full">
+    <app-tab-header>
+      <app-tab-button [index]="0">
+        <lucide-angular [img]="MenuIcon" />
+        Comidas
+      </app-tab-button>
+    </app-tab-header>
+    <app-tab-list class="h-full" className="h-full flex flex-col">
+      <app-tab>
+        <section class="grid grid-cols-4">
+          @for (comida of comidas(); track comida.comidaId) {
+          <app-menu-counter
+            [comida]="comida"
+            [count]="getComidaCount(comida.comidaId)"
+            [onIncrease]="increaseCount"
+            [onDecrease]="decreaseCount"
+          />
+          }
+        </section>
 
-  <footer class="border-t w-full border-slate-300 mt-auto pt-4 gap-4 flex justify-end">
-    <app-button (click)="onClose()" className="bg-transparent border-slate-300 text-black border">
-      Cancelar
-    </app-button>
-    <app-button (click)="onCreateOrden()">Crear Orden</app-button>
-  </footer>
+        <footer class="border-t w-full border-slate-300 mt-auto pt-4 gap-4 flex justify-end">
+          <app-button
+            (click)="onClose()"
+            className="bg-transparent border-slate-300 text-black border"
+          >
+            Cancelar
+          </app-button>
+          <app-button (click)="onCreateOrden()">Crear Orden</app-button>
+        </footer>
+      </app-tab>
+    </app-tab-list>
+  </app-tabs>
 </app-modal>
 
 @if(isLoading()){

@@ -2,6 +2,7 @@ import { ComidaResponse, ResponseMesa } from './response.interface';
 import { ResponseUsuarios } from './user.interface';
 
 export interface MesasOrdenesMessage {
+  orderId?: number;
   mesa: ResponseMesa;
   comidas: ComidaResponse[];
 }
@@ -17,6 +18,7 @@ export interface ResponseOrden {
 }
 
 export interface ComidaOrden {
+  cantidad: number;
   comida: ComidaResponse;
   usuario: ResponseUsuarios;
 }

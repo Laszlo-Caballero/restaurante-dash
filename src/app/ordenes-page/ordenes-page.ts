@@ -24,7 +24,9 @@ export class OrdenesPage implements OnInit {
       subscribes: [
         {
           destination: '/topic/todas-las-ordenes',
-          callback: (msg: MesasOrdenesMessage[]) => this.mesas.set(msg),
+          callback: (msg: MesasOrdenesMessage[]) => {
+            this.mesas.set(msg);
+          },
         },
         {
           destination: '/topic/ordenes',
