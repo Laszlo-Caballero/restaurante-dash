@@ -1,3 +1,8 @@
-<p>home-page works!</p>
-<p>{{ authService.user?.username }}</p>
-<app-button (click)="authService.logout()">Cerrar Sesión</app-button>
+<app-title
+  title="Restaurante Dashboard"
+  subtitle="Vista general de las operaciones del restaurante"
+/>
+
+<div class="grid grid-cols-4 w-full gap-2 mt-4">
+  <app-card title="Ventas de hoy" content="32" />
+</div>
