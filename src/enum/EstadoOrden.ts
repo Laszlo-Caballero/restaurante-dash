@@ -1,0 +1,7 @@
+export enum EstadoOrden {
+  EN_ESPERA = 'EN_ESPERA',
+  PENDIENTE = 'PENDIENTE',
+  EN_PREPARACION = 'EN_PREPARACION',
+  LISTA = 'LISTA',
+  CANCELADA = 'CANCELADA',
+}

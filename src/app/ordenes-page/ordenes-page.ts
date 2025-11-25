@@ -14,9 +14,14 @@ export class OrdenesPage implements OnInit, OnDestroy {
   websocketService = inject(WebsocketService);
   mesas = signal<MesasOrdenesMessage[]>([]);
 
-  isOpenCreateOrden = signal({
+  isOpenCreateOrden = signal<{
+    isOpen: boolean;
+    mesaId: number;
+    pedidoId?: number;
+  }>({
     isOpen: false,
     mesaId: -1,
+    pedidoId: undefined,
   });
 
   ngOnInit() {
@@ -46,9 +51,12 @@ export class OrdenesPage implements OnInit, OnDestroy {
   }
 
   clickedMesa(mesaId: number) {
+    const findMesa = this.mesas().find(({ mesa }) => mesa.mesaId === mesaId);
+
     this.isOpenCreateOrden.set({
       isOpen: true,
       mesaId,
+      pedidoId: findMesa?.ordenId,
     });
   }
 
@@ -56,6 +64,7 @@ export class OrdenesPage implements OnInit, OnDestroy {
     this.isOpenCreateOrden.set({
       isOpen: false,
       mesaId: -1,
+      pedidoId: undefined,
     });
   };
 }

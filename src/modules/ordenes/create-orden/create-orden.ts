@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { Modal } from '@/components/ui/modal/modal';
-import { Hamburger, LucideAngularModule, X } from 'lucide-angular';
+import { Clock, CreditCardIcon, Hamburger, List, LucideAngularModule, X } from 'lucide-angular';
 import { HttpService } from '@/services/http/http-service';
 import { ComidaResponse, ResponseApi } from '@/interfaces/response.interface';
 import { Load } from '@/components/ui/load/load';
@@ -16,6 +16,10 @@ import { TabHeader } from '@/components/ui/tab-header/tab-header';
 import { TabButton } from '@/components/ui/tab-button/tab-button';
 import { TabList } from '@/components/ui/tab-list/tab-list';
 import { Tab } from '@/components/ui/tab/tab';
+import { EstadoOrden } from '@/enum/EstadoOrden';
+import { DetallePedido } from '@/components/shared/detalle-pedido/detalle-pedido';
+import { InputComponent } from '@/components/ui/input/input';
+import { Bagde } from '@/components/ui/bagde/bagde';
 
 @Component({
   selector: 'app-create-orden',
@@ -30,6 +34,8 @@ import { Tab } from '@/components/ui/tab/tab';
     TabButton,
     TabList,
     Tab,
+    InputComponent,
+    Bagde,
   ],
   templateUrl: './create-orden.html',
 })
@@ -45,12 +51,17 @@ export class CreateOrden implements OnInit {
   comidas = signal<ComidaResponse[]>([]);
   isLoading = signal<boolean>(false);
   selectedComidas = signal<SelectedComida[]>([]);
+  ordenDetails = signal<ResponseOrden | undefined>(undefined);
 
   XIcon = X;
   MenuIcon = Hamburger;
+  DetailsIcon = List;
+  CardIcon = CreditCardIcon;
+  EstadoIcon = Clock;
 
   ngOnInit(): void {
     this.loadComidas();
+    this.loadOrden();
   }
 
   loadComidas() {
@@ -67,7 +78,27 @@ export class CreateOrden implements OnInit {
       });
   }
 
-  loadPedido() {}
+  loadOrden() {
+    if (!this.pedidoId) return;
+    this.isLoading.set(true);
+    this.httpService
+      .get<ResponseApi<ResponseOrden>>(`pedidos/detalle/${this.pedidoId}`, {
+        headers: {
+          Authorization: `Bearer ${this.authService.token}`,
+        },
+      })
+      .subscribe({
+        next: (value) => {
+          this.ordenDetails.set(value.data);
+        },
+        error: () => {
+          toast.error('Error al cargar los detalles de la orden.');
+        },
+        complete: () => {
+          this.isLoading.set(false);
+        },
+      });
+  }
 
   onCreateOrden() {
     if (this.selectedComidas().length === 0) {
@@ -98,6 +129,7 @@ export class CreateOrden implements OnInit {
               comida: c.comida,
               cantidad: c.cantidad,
             })),
+            estado: EstadoOrden.PENDIENTE,
           };
           this.websocketService.sendMessage('/app/ordenes', bodyMessage);
           this.onClose();
@@ -127,4 +159,19 @@ export class CreateOrden implements OnInit {
       }
     }
   };
+
+  getFechaFormateada(): string {
+    if (!this.ordenDetails()) {
+      return '';
+    }
+
+    const fecha = new Date(this.ordenDetails()?.fechaCreacion ?? '');
+    return fecha.toLocaleString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
 }

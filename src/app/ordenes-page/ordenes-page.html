@@ -5,12 +5,16 @@
   <app-card-table
     [tableNumber]="res.mesa.numeroMesa"
     [capacity]="res.mesa.capacidad"
-    [status]="res.mesa.disponible"
     (click)="clickedMesa(res.mesa.mesaId)"
+    [ordenEstado]="res.estado"
   />
   }
 </section>
 
 @if(isOpenCreateOrden().isOpen){
-<app-create-orden [onClose]="closeModal" [mesaId]="isOpenCreateOrden().mesaId" />
+<app-create-orden
+  [onClose]="closeModal"
+  [mesaId]="isOpenCreateOrden().mesaId"
+  [pedidoId]="isOpenCreateOrden().pedidoId"
+/>
 }

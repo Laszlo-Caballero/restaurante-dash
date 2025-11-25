@@ -1,10 +1,12 @@
+import { EstadoOrden } from '@/enum/EstadoOrden';
 import { ComidaResponse, ResponseMesa } from './response.interface';
 import { ResponseUsuarios } from './user.interface';
 
 export interface MesasOrdenesMessage {
-  orderId?: number;
+  ordenId?: number;
   mesa: ResponseMesa;
   comidas: ComidaResponse[];
+  estado: EstadoOrden;
 }
 
 export interface ResponseOrden {

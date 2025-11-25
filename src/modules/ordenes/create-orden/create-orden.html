@@ -13,8 +13,12 @@
         <lucide-angular [img]="MenuIcon" />
         Comidas
       </app-tab-button>
+      <app-tab-button [index]="1">
+        <lucide-angular [img]="DetailsIcon" />
+        Detalles
+      </app-tab-button>
     </app-tab-header>
-    <app-tab-list class="h-full" className="h-full flex flex-col">
+    <app-tab-list class="h-full max-h-full" className="h-full max-h-full flex flex-col">
       <app-tab>
         <section class="grid grid-cols-4">
           @for (comida of comidas(); track comida.comidaId) {
@@ -36,6 +40,78 @@
           </app-button>
           <app-button (click)="onCreateOrden()">Crear Orden</app-button>
         </footer>
+      </app-tab>
+      <app-tab>
+        <section class="gap-2 grid grid-cols-2 overflow-y-scroll max-h-[500px]">
+          <app-input
+            label="Id del Pedido"
+            [value]="ordenDetails()?.pedidoId?.toString() ?? ''"
+            [disabled]="true"
+          />
+          <app-input
+            label="Total"
+            [value]="ordenDetails() ? ordenDetails()?.total!.toString() : ''"
+            [disabled]="true"
+          />
+          <app-input label="Fecha de Creación" [value]="getFechaFormateada()" [disabled]="true" />
+          <div class="flex flex-col gap-y-2">
+            <label class="font-semibold"> Metodo de Pago </label>
+            <app-bagde>
+              <lucide-angular [img]="CardIcon" />
+              {{ ordenDetails()?.metodoPago }}
+            </app-bagde>
+          </div>
+          <div class="flex flex-col gap-y-2">
+            <label class="font-semibold"> Estado </label>
+            <app-bagde>
+              <lucide-angular [img]="EstadoIcon" />
+              {{ ordenDetails()?.estado }}
+            </app-bagde>
+          </div>
+          <div class="flex col-span-2 w-full flex-col">
+            <label class="font-semibold text-slate-400">Mesa asociada</label>
+            <div
+              class="w-full grid grid-cols-2 justify-between border border-slate-300 rounded-xl p-4 gap-4 bg-slate-100"
+            >
+              <span class="flex flex-col">
+                <p class="font-semibold text-slate-400">Número de mesa</p>
+                <p class="font-semibold">{{ ordenDetails()?.mesa?.numeroMesa }}</p>
+              </span>
+
+              <span class="flex flex-col">
+                <p class="font-semibold text-slate-400">ID mesa</p>
+                <p class="font-semibold">{{ ordenDetails()?.mesa?.mesaId }}</p>
+              </span>
+
+              <span class="flex flex-col">
+                <p class="font-semibold text-slate-400">Capacidad</p>
+                <p class="font-semibold">{{ ordenDetails()?.mesa?.capacidad }} personas</p>
+              </span>
+            </div>
+          </div>
+
+          <div class="flex col-span-2 w-full flex-col">
+            <label class="font-semibold text-slate-400">Mesa asociada</label>
+            <div
+              class="w-full grid grid-cols-2 justify-between border border-slate-300 rounded-xl p-4 gap-4 bg-slate-100"
+            >
+              <span class="flex flex-col">
+                <p class="font-semibold text-slate-400">Número de mesa</p>
+                <p class="font-semibold">{{ ordenDetails()?.mesa?.numeroMesa }}</p>
+              </span>
+
+              <span class="flex flex-col">
+                <p class="font-semibold text-slate-400">ID mesa</p>
+                <p class="font-semibold">{{ ordenDetails()?.mesa?.mesaId }}</p>
+              </span>
+
+              <span class="flex flex-col">
+                <p class="font-semibold text-slate-400">Capacidad</p>
+                <p class="font-semibold">{{ ordenDetails()?.mesa?.capacidad }} personas</p>
+              </span>
+            </div>
+          </div>
+        </section>
       </app-tab>
     </app-tab-list>
   </app-tabs>
