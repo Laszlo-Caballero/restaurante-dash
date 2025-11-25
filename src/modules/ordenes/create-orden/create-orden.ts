@@ -34,8 +34,7 @@ import { Bagde } from '@/components/ui/bagde/bagde';
     TabButton,
     TabList,
     Tab,
-    InputComponent,
-    Bagde,
+    DetallePedido,
   ],
   templateUrl: './create-orden.html',
 })
@@ -56,8 +55,6 @@ export class CreateOrden implements OnInit {
   XIcon = X;
   MenuIcon = Hamburger;
   DetailsIcon = List;
-  CardIcon = CreditCardIcon;
-  EstadoIcon = Clock;
 
   ngOnInit(): void {
     this.loadComidas();
@@ -159,19 +156,4 @@ export class CreateOrden implements OnInit {
       }
     }
   };
-
-  getFechaFormateada(): string {
-    if (!this.ordenDetails()) {
-      return '';
-    }
-
-    const fecha = new Date(this.ordenDetails()?.fechaCreacion ?? '');
-    return fecha.toLocaleString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  }
 }
