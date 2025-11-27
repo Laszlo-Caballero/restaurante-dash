@@ -2,7 +2,15 @@
   title="Gestión de Mesas"
   subtitle="Administra las mesas de tu restaurante de manera eficiente."
 >
-  <app-button (click)="openCreateMesa()"> Añadir Nueva Mesa </app-button>
+  <app-tooltip
+    text="Solo Administradores"
+    [position]="PositionTooltip.BOTTOM"
+    [disable]="authService.isAdmin()"
+  >
+    <app-button (click)="openCreateMesa()" [disabled]="!authService.isAdmin()">
+      Añadir Nueva Mesa
+    </app-button>
+  </app-tooltip>
 </app-title>
 
 <div class="flex flex-col gap-y-5 p-4">

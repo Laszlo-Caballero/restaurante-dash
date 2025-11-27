@@ -1,1 +1,21 @@
-<p>pedidos-page works!</p>
+<app-title title="Pedidos" subtitle="Historial y estado de todos los pedidos realizados" />
+
+<div class="rounded-xl shadow-xl">
+  <app-table [columns]="columns()" [data]="pedidos()">
+    <ng-template #actions let-row>
+      <app-button
+        className="bg-blue-600 hover:bg-blue-700 py-1 flex items-center gap-2"
+        (click)="openDetailsModal(row)"
+      >
+        <lucide-angular [img]="EyeIcon" class="w-4 h-4" />
+        Ver Detalle
+      </app-button>
+    </ng-template>
+  </app-table>
+</div>
+
+@if(isLoading()){
+<app-load />
+} @if(isOpenDetailsModal()){
+<app-details-pedidos [orden]="selectedPedido()!" [onCloseModal]="closeDetailsModal" />
+}

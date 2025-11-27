@@ -2,24 +2,39 @@
   title="Administrar Comidas"
   subtitle="Crea, organiza y actualiza los platos del restaurante"
 >
-  <a
-    routerLink="/comidas/nueva-comida"
-    class="bg-slate-900 text-white px-4 py-3 rounded-xl font-semibold flex items-center gap-x-1"
+  <app-tooltip
+    text="Solo Administradores"
+    [position]="PositionTooltip.BOTTOM"
+    [disable]="authService.isAdmin()"
   >
-    <lucide-angular [img]="PlusIcon" [strokeWidth]="1.5" />
-    Nueva Comida
-  </a>
+    <button
+      routerLink="/comidas/nueva-comida"
+      class="bg-slate-900 text-white px-4 py-3 rounded-xl font-semibold flex items-center gap-x-1 disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="!authService.isAdmin()"
+    >
+      <lucide-angular [img]="PlusIcon" [strokeWidth]="1.5" />
+      Nueva Comida
+    </button>
+  </app-tooltip>
 </app-title>
 
 <div class="rounded-xl shadow-xl">
   <app-table [data]="data" [columns]="columns">
     <ng-template #actions let-row>
       <div class="flex items-center gap-2">
-        <a
-          [routerLink]="['/comidas/editar', row.comidaId]"
-          class="text-blue-600 font-semibold hover:underline"
-          >Editar</a
+        <app-tooltip
+          text="Solo Administradores"
+          [position]="PositionTooltip.BOTTOM"
+          [disable]="authService.isAdmin()"
         >
+          <button
+            [routerLink]="['/comidas/editar', row.comidaId]"
+            class="text-blue-600 font-semibold hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+            [disabled]="!authService.isAdmin()"
+          >
+            Editar
+          </button>
+        </app-tooltip>
         <a [routerLink]="['/comidas/detalles', row.comidaId]"> Detalles </a>
       </div>
     </ng-template>

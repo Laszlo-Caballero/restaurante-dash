@@ -9,10 +9,12 @@ import { Load } from '@/components/ui/load/load';
 import { CardTable } from '@/components/ui/card-table/card-table';
 import { CreateMesa } from '@/modules/mesas/create-mesa/create-mesa';
 import { ModalOptionsMesa } from '@/modules/mesas/modal-options-mesa/modal-options-mesa';
+import { Tooltip } from '@/components/ui/tooltip/tooltip';
+import { PositionTooltip } from '@/components/ui/tooltip/enum';
 
 @Component({
   selector: 'app-mesas-page',
-  imports: [Title, Button, Load, CardTable, CreateMesa, ModalOptionsMesa],
+  imports: [Title, Button, Load, CardTable, CreateMesa, ModalOptionsMesa, Tooltip],
   templateUrl: './mesas-page.html',
 })
 export class MesasPage implements OnInit {
@@ -25,6 +27,8 @@ export class MesasPage implements OnInit {
   selectedMesa = signal<ResponseMesa | null>(null);
 
   mesas = signal<ResponseMesa[]>([]);
+
+  PositionTooltip = PositionTooltip;
 
   ngOnInit(): void {
     this.loadMesas();
@@ -40,6 +44,11 @@ export class MesasPage implements OnInit {
   };
 
   openEDMesa(mesa: ResponseMesa) {
+    if (!this.authService.isAdmin()) {
+      toast.error('Solo Administradores');
+      return;
+    }
+
     this.selectedMesa.set(mesa);
     this.isOpenEDMesa.set(true);
   }

@@ -19,21 +19,35 @@
   </app-bagde>
 
   <div class="flex items-center justify-between">
-    <app-button
-      className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
-      (click)="openEditModal(categoryId)"
+    <app-tooltip
+      text="Solo Administradores"
+      [position]="PositionTooltip.BOTTOM"
+      [disable]="authService.isAdmin()"
     >
-      <lucide-angular [img]="EditIcon" class="size-4" />
-      Editar
-    </app-button>
+      <app-button
+        className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
+        (click)="openEditModal(categoryId)"
+        [disabled]="!authService.isAdmin()"
+      >
+        <lucide-angular [img]="EditIcon" class="size-4" />
+        Editar
+      </app-button>
+    </app-tooltip>
 
-    <app-button
-      className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
-      (click)="openDeleteModal(categoryId)"
+    <app-tooltip
+      text="Solo Administradores"
+      [position]="PositionTooltip.BOTTOM"
+      [disable]="authService.isAdmin()"
     >
-      <lucide-angular [img]="TrashIcon" class="size-4" />
-      Eliminar
-    </app-button>
+      <app-button
+        className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
+        (click)="openDeleteModal(categoryId)"
+        [disabled]="!authService.isAdmin()"
+      >
+        <lucide-angular [img]="TrashIcon" class="size-4" />
+        Eliminar
+      </app-button>
+    </app-tooltip>
   </div>
   <p class="text-slate-400 text-sm">
     {{ categoryDescription }}

@@ -10,10 +10,12 @@ import { AuthService } from '@/services/auth/auth-service';
 import { toast } from 'ngx-sonner';
 import { Load } from '@/components/ui/load/load';
 import { ENV } from '@/config/env';
+import { Tooltip } from '@/components/ui/tooltip/tooltip';
+import { PositionTooltip } from '@/components/ui/tooltip/enum';
 
 @Component({
   selector: 'app-comida-page',
-  imports: [LucideAngularModule, Title, RouterLink, Table, Load],
+  imports: [LucideAngularModule, Title, RouterLink, Table, Load, Tooltip],
   templateUrl: './comida-page.html',
 })
 export class ComidaPage implements OnInit {
@@ -24,6 +26,7 @@ export class ComidaPage implements OnInit {
   @ViewChild('actions', { static: true }) accionesTemplate!: TemplateRef<any>;
 
   readonly PlusIcon = Plus;
+  PositionTooltip = PositionTooltip;
 
   data: ComidaResponse[] = [];
 

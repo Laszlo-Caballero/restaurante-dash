@@ -42,10 +42,6 @@ export const routes: Routes = [
         component: DetalleComida,
       },
       {
-        path: 'comidas/editar/:id',
-        component: ActualizarComida,
-      },
-      {
         path: 'mesas',
         component: MesasPage,
       },
@@ -71,6 +67,10 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosPage,
+      },
+      {
+        path: 'comidas/editar/:id',
+        component: ActualizarComida,
       },
     ],
   },

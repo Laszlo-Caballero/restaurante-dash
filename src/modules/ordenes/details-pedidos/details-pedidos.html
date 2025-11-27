@@ -1,0 +1,57 @@
+<app-modal (click)="onCloseModal()">
+  <header class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold">Detalle del Pedido #{{ orden.pedidoId }}</h2>
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <div class="flex flex-col gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <p class="text-sm text-gray-500">Fecha</p>
+        <p class="font-medium">{{ parseDate(orden.fechaCreacion) }}</p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Mesa</p>
+        <p class="font-medium">Mesa {{ orden.mesa.numeroMesa }}</p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Estado</p>
+        <app-bagde>{{ orden.estado }}</app-bagde>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Total</p>
+        <p class="font-medium">${{ orden.total }}</p>
+      </div>
+      <div>
+        <p class="text-sm text-gray-500">Metodo de Pago</p>
+        <p class="font-medium">{{ orden.metodoPago }}</p>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-semibold mt-4">Productos</h3>
+    <div class="border rounded-lg overflow-hidden">
+      <table class="w-full text-sm text-left">
+        <thead class="bg-gray-50 text-gray-700 uppercase">
+          <tr>
+            <th class="px-4 py-2">Producto</th>
+            <th class="px-4 py-2">Cantidad</th>
+            <th class="px-4 py-2">Precio Unit.</th>
+            <th class="px-4 py-2">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(comida of orden.comidas; track comida.pedidoComidaId) {
+          <tr class="border-b">
+            <td class="px-4 py-2">{{ comida.comida.nombre }}</td>
+            <td class="px-4 py-2">{{ comida.cantidad }}</td>
+            <td class="px-4 py-2">${{ comida.comida.precio }}</td>
+            <td class="px-4 py-2">${{ comida.cantidad * comida.comida.precio }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-modal>
