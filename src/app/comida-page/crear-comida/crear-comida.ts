@@ -42,7 +42,6 @@ export class CrearComida implements OnInit {
   comidaForm = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(1)]),
     precio: new FormControl('', [Validators.required, Validators.min(0)]),
-    slug: new FormControl('', [Validators.required, Validators.minLength(1)]),
     descripcion: new FormControl('', [Validators.required, Validators.minLength(1)]),
     disponible: new FormControl(false),
     categoriaIds: new FormControl<Array<number>>([], [Validators.required]),
@@ -154,7 +153,7 @@ export class CrearComida implements OnInit {
   loadCategories() {
     this.isLoading = true;
     this.httpClient
-      .get<ResponseApi<ResponseCategoria[]>>('categorias', {
+      .get<ResponseApi<ResponseCategoria[]>>('categorias?estado=true', {
         headers: {
           Authorization: `Bearer ${this.authService.token}`,
         },

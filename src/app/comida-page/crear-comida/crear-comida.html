@@ -16,13 +16,7 @@
       formControlName="nombre"
       [control]="comidaForm.controls.nombre"
     />
-    <app-input
-      label="Slug"
-      placeholder="Ingrese el slug de la comida"
-      id="slug"
-      formControlName="slug"
-      [control]="comidaForm.controls.slug"
-    />
+
     <app-input
       label="Precio"
       placeholder="Ingrese el precio de la comida"
@@ -36,6 +30,7 @@
       id="description"
       formControlName="descripcion"
       [control]="comidaForm.controls.descripcion"
+      class="col-span-2"
     />
     <app-checkbox
       label="Disponible"
