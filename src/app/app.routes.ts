@@ -12,6 +12,7 @@ import { DetalleComida } from './comida-page/detalle-comida/detalle-comida';
 import { UsuariosPage } from './usuarios-page/usuarios-page';
 import { MesasPage } from './mesas-page/mesas-page';
 import { OrdenesPage } from './ordenes-page/ordenes-page';
+import { ActualizarComida } from './comida-page/actualizar-comida/actualizar-comida';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,10 @@ export const routes: Routes = [
       {
         path: 'comidas/detalles/:id',
         component: DetalleComida,
+      },
+      {
+        path: 'comidas/editar/:id',
+        component: ActualizarComida,
       },
       {
         path: 'mesas',

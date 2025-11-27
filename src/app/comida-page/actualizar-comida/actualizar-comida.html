@@ -1,0 +1,86 @@
+<form class="flex flex-col gap-y-4" [formGroup]="comidaForm" (ngSubmit)="onSubmit()">
+  <app-title title="Actualizar Comida" subtitle="Actualizar una comida existente">
+    <div class="flex items-center gap-x-2">
+      <app-button (click)="backTo()" className="bg-transparent border border-slate-300 text-black">
+        Cancelar
+      </app-button>
+      <app-button type="submit"> Actualizar Comida </app-button>
+    </div>
+  </app-title>
+
+  <main class="grid grid-cols-2 gap-2">
+    <app-input
+      label="Nombre"
+      placeholder="Ingrese el nombre de la comida"
+      id="name"
+      formControlName="nombre"
+      [control]="comidaForm.controls.nombre"
+    />
+
+    <app-input
+      label="Precio"
+      placeholder="Ingrese el precio de la comida"
+      id="price"
+      formControlName="precio"
+      [control]="comidaForm.controls.precio"
+    />
+    <app-text-area
+      label="Descripción"
+      placeholder="Ingrese la descripción de la comida"
+      id="description"
+      formControlName="descripcion"
+      [control]="comidaForm.controls.descripcion"
+      class="col-span-2"
+    />
+    <app-checkbox
+      label="Disponible"
+      placeholder="La comida está disponible"
+      [value]="comidaForm.get('disponible')?.value!"
+      (click)="onChangeSelect()"
+    />
+
+    <div class="w-full flex flex-wrap items-center gap-2">
+      <label class="w-full text-slate-400 font-semibold">Categorías</label>
+      @for(categoria of categories; track categoria.id){
+      <span
+        [className]="
+          cx(
+            'border border-slate-300 rounded-xl cursor-pointer px-4 py-1',
+            isCategoriaSelected(categoria.id) && 'bg-slate-900 text-white'
+          )
+        "
+        (click)="pushCategoriaId(categoria.id)"
+      >
+        {{ categoria.nombre }}
+      </span>
+      }
+    </div>
+  </main>
+
+  <div class="flex flex-col gap-y-2 cursor-pointer col-span-2" (click)="openGaleryModal()">
+    <p class="text-slate-400 font-semibold">Imagen de la categoría</p>
+    <span
+      class="border-2 border-dashed h-[200px] border-slate-300 flex items-center justify-center rounded-3xl"
+    >
+      <div class="flex flex-col items-center gap-y-2 w-full h-full justify-center p-2">
+        @if(selectedImage.recursoId == -1 && !selectedImage.file){
+        <lucide-icon [img]="UploadIcon" />
+        <p>Haga clic para seleccionar una imagen</p>
+        } @if(selectedImage.recursoId != -1){
+        <img [src]="getImageUrl()" class="h-full w-full object-cover rounded-lg" />
+        } @if(selectedImage.file){
+        <img [src]="getFileUrl()" class="h-full w-full object-cover rounded-lg" />
+        }
+      </div>
+    </span>
+  </div>
+</form>
+
+@if(isLoading){
+<app-load />
+} @if(isGaleryModalOpen){
+<app-galery-modal
+  [onClose]="onCloseGaleryModal"
+  [selectedImage]="selectedImage"
+  [onSelect]="onSelectImage"
+/>}
