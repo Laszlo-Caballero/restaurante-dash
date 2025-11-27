@@ -2,28 +2,32 @@ import { ResponseOrden } from '@/interfaces/ordenes.interface';
 import { Component, ElementRef, inject, Input, signal, ViewChild } from '@angular/core';
 import { InputComponent } from '@/components/ui/input/input';
 import { Bagde } from '@/components/ui/bagde/bagde';
-import { Check, Clock, CreditCardIcon, LucideAngularModule, Printer } from 'lucide-angular';
+import { Check, Clock, CreditCardIcon, LucideAngularModule, Printer, Trash } from 'lucide-angular';
 import { cx } from '@/utils/cx';
 import { Button } from '@/components/ui/button/button';
 import { AuthService } from '@/services/auth/auth-service';
 import { HttpService } from '@/services/http/http-service';
 import { toast } from 'ngx-sonner';
 import { EstadoPedido, PedidoEnum } from '@/enum/EstadoPedido';
+import { CancelOrden } from '@/modules/ordenes/cancel-orden/cancel-orden';
+import { CompleteOrden } from '@/modules/ordenes/complete-orden/complete-orden';
 
 @Component({
   selector: 'app-detalle-pedido',
-  imports: [InputComponent, Bagde, LucideAngularModule, Button],
+  imports: [InputComponent, Bagde, LucideAngularModule, Button, CancelOrden, CompleteOrden],
   templateUrl: './detalle-pedido.html',
 })
 export class DetallePedido {
   @Input() detalle?: ResponseOrden;
   @Input() className?: string = '';
   @Input() relaodDetalle?: () => void;
+  @Input() onClose?: () => void;
 
   CardIcon = CreditCardIcon;
   EstadoIcon = Clock;
   PrinterIcon = Printer;
   CheckIcon = Check;
+  TrashIcon = Trash;
 
   isLoading = signal(false);
 
@@ -33,6 +37,28 @@ export class DetallePedido {
   httpClient = inject(HttpService);
 
   cx = cx;
+
+  isOpenCancelModal = signal(false);
+  isOpenCompleteModal = signal(false);
+
+  cancelarPedido = () => {
+    this.isOpenCancelModal.set(true);
+    this.relaodDetalle?.();
+  };
+
+  onCloseCancelModal = () => {
+    this.isOpenCancelModal.set(false);
+    this.onClose?.();
+  };
+
+  completarPedido = () => {
+    this.isOpenCompleteModal.set(true);
+  };
+
+  onCloseCompleteModal = () => {
+    this.isOpenCompleteModal.set(false);
+    this.onClose?.();
+  };
 
   getFechaFormateada(): string {
     if (!this.detalle) {
@@ -120,6 +146,10 @@ export class DetallePedido {
   onChangeEstado(pedidoComidaId: string | number, nuevoEstado: keyof typeof EstadoPedido) {
     if (this.detalle?.estado === PedidoEnum.CANCELADO) {
       toast.error('No se puede cambiar el estado de un pedido cancelado');
+      return;
+    }
+    if (this.detalle?.estado === PedidoEnum.PAGADO) {
+      toast.error('No se puede cambiar el estado de un pedido completado');
       return;
     }
 

@@ -108,9 +108,20 @@
       <lucide-angular [img]="PrinterIcon" />
       Imprimir Detalle
     </app-button>
-    <app-button className="flex items-center gap-2">
+
+    <app-button className="flex items-center gap-2" (click)="cancelarPedido()">
+      <lucide-angular [img]="TrashIcon" />
+      Cancelar Pedido
+    </app-button>
+    <app-button className="flex items-center gap-2" (click)="completarPedido()">
       <lucide-angular [img]="CheckIcon" />
       Completar Pedido
     </app-button>
   </footer>
 </div>
+
+@if(isOpenCancelModal() && detalle) {
+<app-cancel-orden [detalle]="detalle" [onCloseModal]="onCloseCancelModal" />
+} @if(isOpenCompleteModal() && detalle) {
+<app-complete-orden [detalle]="detalle" [onClose]="onCloseCompleteModal" />
+}

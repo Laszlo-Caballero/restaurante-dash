@@ -1,0 +1,42 @@
+<app-modal (click)="onClose()">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Cancelar Orden</h2>
+
+    <button (click)="onClose()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <div class="flex items-center w-full flex-wrap">
+    <p class="text-slate-600 w-full">
+      ¿Estás seguro que deseas completar la orden con ID: <strong>{{ detalle.pedidoId }}</strong
+      >?
+    </p>
+    <app-bagde
+      [className]="cx(metodoPago === 'Efectivo' && 'bg-slate-900 text-white')"
+      (click)="onChangeMetodoPago('Efectivo')"
+    >
+      <lucide-angular [img]="CoinIcon" />
+      Efectivo
+    </app-bagde>
+
+    <app-bagde
+      [className]="cx(metodoPago === 'Tarjeta' && 'bg-slate-900 text-white')"
+      (click)="onChangeMetodoPago('Tarjeta')"
+    >
+      <lucide-angular [img]="TargetIcon" />
+      Tarjeta
+    </app-bagde>
+  </div>
+
+  <footer class="flex justify-end w-full gap-x-2">
+    <app-button className="bg-transparent text-black border border-slate-300" (click)="onClose()">
+      Cancelar
+    </app-button>
+    <app-button (click)="onCompleteOrden()"> Confirmar </app-button>
+  </footer>
+</app-modal>
+
+@if(isLoading){
+<app-load />
+}
