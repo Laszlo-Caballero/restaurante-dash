@@ -13,7 +13,6 @@ import {
 } from 'lucide-angular';
 import { cx } from '@/utils/cx';
 import { AuthService } from '@/services/auth/auth-service';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { getRole } from '@/utils/getRole';
 import { Link } from '@/components/ui/link/link';
@@ -21,7 +20,7 @@ import { Link } from '@/components/ui/link/link';
 @Component({
   selector: 'app-aside',
   standalone: true,
-  imports: [Link, RouterLink, FormsModule, LucideAngularModule],
+  imports: [Link, FormsModule, LucideAngularModule],
   templateUrl: './aside.html',
 })
 export class Aside implements AfterViewInit {
