@@ -10,13 +10,14 @@ import { ColumnDef } from '@/interfaces/table.interface';
 import { parseDate } from '@/utils/parseDate';
 import { Table } from '@/components/ui/table/table';
 import { Bagde } from '@/components/ui/bagde/bagde';
-import { Shield, UserIcon, LucideAngularModule } from 'lucide-angular';
+import { Shield, UserIcon, LucideAngularModule, Plus } from 'lucide-angular';
 import { Button } from '@/components/ui/button/button';
 import { EliminarUsuario } from '@/modules/usuarios/eliminar-usuario/eliminar-usuario';
+import { CreateUsuario } from '@/modules/usuarios/create-usuario/create-usuario';
 
 @Component({
   selector: 'app-usuarios-page',
-  imports: [Load, Title, Table, Bagde, LucideAngularModule, Button, EliminarUsuario],
+  imports: [Load, Title, Table, Bagde, LucideAngularModule, Button, EliminarUsuario, CreateUsuario],
   templateUrl: './usuarios-page.html',
 })
 export class UsuariosPage implements OnInit {
@@ -28,10 +29,12 @@ export class UsuariosPage implements OnInit {
 
   ShieldIcon = Shield;
   UserIcon = UserIcon;
+  PlusIcon = Plus;
 
   users = signal<ResponseUsuarios[]>([]);
   isLoading = signal(false);
   isOpenModal = signal(false);
+  isOpenCreateUsuarioModal = signal(false);
   selectedUser = signal<ResponseUsuarios | null>(null);
 
   columns = signal<ColumnDef<ResponseUsuarios>[]>([
@@ -106,4 +109,13 @@ export class UsuariosPage implements OnInit {
         },
       });
   }
+
+  openCreateUsuarioModal() {
+    this.isOpenCreateUsuarioModal.set(true);
+  }
+
+  onCloseCreateUsuarioModal = () => {
+    this.isOpenCreateUsuarioModal.set(false);
+    this.loadUsers();
+  };
 }

@@ -1,0 +1,69 @@
+<app-modal (click)="onCloseModal()">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Crear Usuario</h2>
+
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <form class="flex flex-col gap-y-3" [formGroup]="userForm" (ngSubmit)="onSubmitUser()">
+    <app-input
+      id="nombre"
+      type="text"
+      label="Nombre completo"
+      placeholder="Ingrese el nombre completo"
+      formControlName="nombre"
+      [control]="userForm.get('nombre')"
+    />
+    <app-input
+      id="username"
+      type="text"
+      label="Usuario"
+      placeholder="Ingrese el nombre de usuario"
+      formControlName="username"
+      [control]="userForm.get('username')"
+    />
+    <app-input
+      id="password"
+      type="password"
+      label="Contraseña"
+      placeholder="Ingrese la contraseña"
+      formControlName="password"
+      [control]="userForm.get('password')"
+    />
+
+    <div class="flex w-full items-center gap-x-2">
+      <app-bagde
+        class="w-full"
+        [className]="
+          cx('w-full max-w-none cursor-pointer', getRole() === 'ADMIN' && 'bg-slate-900 text-white')
+        "
+        (click)="setRole('ADMIN')"
+      >
+        <lucide-angular [img]="ShieldIcon" />
+        Administrador
+      </app-bagde>
+      <app-bagde
+        class="w-full"
+        [className]="
+          cx('w-full max-w-none cursor-pointer', getRole() === 'USER' && 'bg-slate-900 text-white')
+        "
+        (click)="setRole('USER')"
+      >
+        <lucide-angular [img]="UserIcon" />
+        Usuario
+      </app-bagde>
+    </div>
+
+    <footer class="flex justify-end w-full gap-x-2">
+      <app-button
+        className="bg-transparent text-black border border-slate-300"
+        (click)="onCloseModal()"
+      >
+        Cancelar
+      </app-button>
+      <app-button type="submit"> Crear Categoria </app-button>
+    </footer>
+  </form>
+</app-modal>

@@ -1,4 +1,8 @@
 <app-title title="Usuarios" subtitle="Gestión completa de los usuarios registrados en el sistema">
+  <app-button className="flex items-center gap-2" (click)="openCreateUsuarioModal()">
+    <lucide-angular [img]="PlusIcon" />
+    Crear Usuario
+  </app-button>
 </app-title>
 
 <div class="rounded-xl shadow-xl">
@@ -29,4 +33,6 @@
 <app-load />
 } @if(isOpenModal()){
 <app-eliminar-usuario [user]="selectedUser()!" [onCloseModal]="onCloseModal" />
+} @if(isOpenCreateUsuarioModal()){
+<app-create-usuario [onCloseModal]="onCloseCreateUsuarioModal" />
 }
