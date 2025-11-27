@@ -1,9 +1,11 @@
 const path = require('path');
 const express = require('express');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.static(path.join(__dirname, 'dist', 'restaurante-dash', 'browser')));
 

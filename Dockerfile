@@ -27,10 +27,10 @@ RUN npm install express
 COPY --from=build /app/dist ./dist
 
 # Copy the server script
-COPY server.js .
+COPY server.cjs .
 
 # Expose the port the app runs on
 EXPOSE 4000
 
 # Start the server
-CMD ["node", "server.js"]
+CMD ["node", "server.cjs"]
