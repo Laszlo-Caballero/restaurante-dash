@@ -20,7 +20,7 @@
     </app-tab-header>
     <app-tab-list class="h-full max-h-full" className="h-full max-h-full flex flex-col">
       <app-tab>
-        <section class="grid grid-cols-4">
+        <section class="grid grid-cols-4 gap-2">
           @for (comida of comidas(); track comida.comidaId) {
           <app-menu-counter
             [comida]="comida"
@@ -38,7 +38,7 @@
           >
             Cancelar
           </app-button>
-          <app-button (click)="onCreateOrden()">Crear Orden</app-button>
+          <app-button (click)="onClickButton()">{{ getLabelButton() }}</app-button>
         </footer>
       </app-tab>
       <app-tab class="h-full">

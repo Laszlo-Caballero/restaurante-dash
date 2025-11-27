@@ -95,6 +95,50 @@ export class CreateOrden implements OnInit {
       });
   }
 
+  onClickButton() {
+    if (this.pedidoId) {
+      this.addItem();
+    } else {
+      this.onCreateOrden();
+    }
+  }
+
+  getLabelButton() {
+    return this.pedidoId ? 'Agregar Items' : 'Crear Orden';
+  }
+
+  addItem() {
+    if (!this.pedidoId) return;
+    if (this.selectedComidas().length === 0) {
+      toast.error('Debe seleccionar al menos una comida para agregar a la orden.');
+      return;
+    }
+    this.isLoading.set(true);
+
+    const body = {
+      items: this.selectedComidas(),
+    };
+
+    this.httpService
+      .put(`pedidos/agregar-item/${this.pedidoId}`, body, {
+        headers: {
+          Authorization: `Bearer ${this.authService.token}`,
+        },
+      })
+      .subscribe({
+        next: (data) => {
+          this.isLoading.set(false);
+          toast.success('Items agregados con éxito.');
+          console.log(data);
+          this.loadOrden();
+        },
+        error: () => {
+          this.isLoading.set(false);
+          toast.error('Error al agregar los items.');
+        },
+      });
+  }
+
   onCreateOrden() {
     if (this.selectedComidas().length === 0) {
       toast.error('Debe seleccionar al menos una comida para crear la orden.');
