@@ -22,7 +22,6 @@ export class WebsocketService {
 
   connect(props?: OnConnect) {
     this.stompClient().onConnect = () => {
-      toast.success('WebSocket connected successfully!', { duration: 3000 });
       props?.subscribes?.forEach(({ destination, callback, initialLoad }) => {
         this.subscribe(destination, callback);
         if (initialLoad) {
