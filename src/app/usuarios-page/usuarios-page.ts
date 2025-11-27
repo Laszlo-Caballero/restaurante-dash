@@ -14,10 +14,21 @@ import { Shield, UserIcon, LucideAngularModule, Plus } from 'lucide-angular';
 import { Button } from '@/components/ui/button/button';
 import { EliminarUsuario } from '@/modules/usuarios/eliminar-usuario/eliminar-usuario';
 import { CreateUsuario } from '@/modules/usuarios/create-usuario/create-usuario';
+import { UpdateUsuario } from '@/modules/usuarios/update-usuario/update-usuario';
 
 @Component({
   selector: 'app-usuarios-page',
-  imports: [Load, Title, Table, Bagde, LucideAngularModule, Button, EliminarUsuario, CreateUsuario],
+  imports: [
+    Load,
+    Title,
+    Table,
+    Bagde,
+    LucideAngularModule,
+    Button,
+    EliminarUsuario,
+    CreateUsuario,
+    UpdateUsuario,
+  ],
   templateUrl: './usuarios-page.html',
 })
 export class UsuariosPage implements OnInit {
@@ -36,6 +47,7 @@ export class UsuariosPage implements OnInit {
   isOpenModal = signal(false);
   isOpenCreateUsuarioModal = signal(false);
   selectedUser = signal<ResponseUsuarios | null>(null);
+  isOpenUpdateUsuarioModal = signal(false);
 
   columns = signal<ColumnDef<ResponseUsuarios>[]>([
     {
@@ -116,6 +128,17 @@ export class UsuariosPage implements OnInit {
 
   onCloseCreateUsuarioModal = () => {
     this.isOpenCreateUsuarioModal.set(false);
+    this.loadUsers();
+  };
+
+  openUpdateUsuarioModal(user: ResponseUsuarios) {
+    this.selectedUser.set(user);
+    this.isOpenUpdateUsuarioModal.set(true);
+  }
+
+  onCloseUpdateUsuarioModal = () => {
+    this.isOpenUpdateUsuarioModal.set(false);
+    this.selectedUser.set(null);
     this.loadUsers();
   };
 }

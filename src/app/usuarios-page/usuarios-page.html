@@ -22,6 +22,12 @@
     </ng-template>
 
     <ng-template #actions let-row>
+      <app-button
+        className="bg-blue-600 hover:bg-blue-700 py-1 mr-2"
+        (click)="openUpdateUsuarioModal(row)"
+      >
+        Editar
+      </app-button>
       <app-button className="bg-red-600 hover:bg-red-700 py-1" (click)="onDeleteUser(row)">
         Eliminar
       </app-button>
@@ -35,4 +41,6 @@
 <app-eliminar-usuario [user]="selectedUser()!" [onCloseModal]="onCloseModal" />
 } @if(isOpenCreateUsuarioModal()){
 <app-create-usuario [onCloseModal]="onCloseCreateUsuarioModal" />
+} @if(isOpenUpdateUsuarioModal()){
+<app-update-usuario [user]="selectedUser()!" [onCloseModal]="onCloseUpdateUsuarioModal" />
 }
