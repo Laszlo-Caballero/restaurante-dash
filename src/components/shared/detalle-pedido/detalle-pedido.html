@@ -45,7 +45,7 @@
 
     <div class="flex col-span-2 w-full flex-col">
       <label class="font-semibold text-slate-400">Comidas del Pedido</label>
-      @for(comida of detalle?.comidas; track comida.comida.comidaId){
+      @for(comida of getOrderComidaPedido(); track comida.comida.comidaId){
       <div
         class="w-full grid grid-cols-2 justify-between border first:mt-0 mt-2 border-slate-300 rounded-xl p-4 gap-4 bg-slate-100"
       >
@@ -53,7 +53,7 @@
           <span class="flex flex-col">
             <p class="font-semibold text-slate-400">{{ comida.comida.nombre }}</p>
             <p class="font-semibold">
-              x{{ comida.cantidad }} unidades * ID comida {{ comida.comida.comidaId }}
+              x{{ comida.cantidad }} unidades * ID comida {{ comida.pedidoComidaId }}
             </p>
           </span>
         </span>
@@ -71,25 +71,33 @@
         </span>
         <span class="flex items-center gap-2 col-span-2">
           <app-bagde
-            [className]="cx(comida.estado === 'PENDIENTE' && 'bg-slate-900 text-white')"
+            [className]="
+              cx('cursor-pointer', comida.estado === 'PENDIENTE' && 'bg-slate-900 text-white')
+            "
             (click)="onChangeEstado(comida.pedidoComidaId, 'PENDIENTE')"
           >
             Pendiente
           </app-bagde>
           <app-bagde
-            [className]="cx(comida.estado === 'DESPACHADO' && 'bg-slate-900 text-white')"
+            [className]="
+              cx('cursor-pointer', comida.estado === 'DESPACHADO' && 'bg-slate-900 text-white')
+            "
             (click)="onChangeEstado(comida.pedidoComidaId, 'DESPACHADO')"
           >
             Despachado
           </app-bagde>
           <app-bagde
-            [className]="cx(comida.estado === 'CANCELADO' && 'bg-slate-900 text-white')"
+            [className]="
+              cx('cursor-pointer', comida.estado === 'CANCELADO' && 'bg-slate-900 text-white')
+            "
             (click)="onChangeEstado(comida.pedidoComidaId, 'CANCELADO')"
           >
             Cancelado
           </app-bagde>
           <app-bagde
-            [className]="cx(comida.estado === 'COMPLETADO' && 'bg-slate-900 text-white')"
+            [className]="
+              cx('cursor-pointer', comida.estado === 'COMPLETADO' && 'bg-slate-900 text-white')
+            "
             (click)="onChangeEstado(comida.pedidoComidaId, 'COMPLETADO')"
           >
             Completado

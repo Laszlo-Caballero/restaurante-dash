@@ -9,6 +9,7 @@ import { Load } from '@/components/ui/load/load';
 import { Coins, CreditCard, LucideAngularModule, X } from 'lucide-angular';
 import { Bagde } from '@/components/ui/bagde/bagde';
 import { cx } from '@/utils/cx';
+import { WebsocketService } from '@/services/websocket/websocket-service';
 
 @Component({
   selector: 'app-complete-orden',
@@ -24,6 +25,7 @@ export class CompleteOrden {
 
   authService = inject(AuthService);
   httpClient = inject(HttpService);
+  webSocket = inject(WebsocketService);
 
   XIcon = X;
   CoinIcon = Coins;
@@ -51,6 +53,7 @@ export class CompleteOrden {
         next: () => {
           this.isLoading = false;
           toast.success('Orden completada con éxito');
+          this.webSocket.sendMessage('/app/limpiar-mesa', this.detalle?.mesa.mesaId);
           this.onClose();
         },
         error: () => {

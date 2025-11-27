@@ -7,6 +7,7 @@ import { AuthService } from '@/services/auth/auth-service';
 import { HttpService } from '@/services/http/http-service';
 import { toast } from 'ngx-sonner';
 import { Load } from '@/components/ui/load/load';
+import { WebsocketService } from '@/services/websocket/websocket-service';
 
 @Component({
   selector: 'app-cancel-orden',
@@ -23,6 +24,7 @@ export class CancelOrden {
 
   authService = inject(AuthService);
   httpClient = inject(HttpService);
+  webSocket = inject(WebsocketService);
 
   cancelarPedido() {
     this.isLoading.set(true);
@@ -36,6 +38,7 @@ export class CancelOrden {
         next: () => {
           toast.success('Pedido cancelado con éxito');
           this.isLoading.set(false);
+          this.webSocket.sendMessage('/app/limpiar-mesa', this.detalle?.mesa.mesaId);
           this.onCloseModal();
         },
         error: () => {

@@ -41,6 +41,10 @@ export class DetallePedido {
   isOpenCancelModal = signal(false);
   isOpenCompleteModal = signal(false);
 
+  getOrderComidaPedido() {
+    return this.detalle?.comidas.sort((a, b) => a.pedidoComidaId - b.pedidoComidaId) || [];
+  }
+
   cancelarPedido = () => {
     this.isOpenCancelModal.set(true);
     this.relaodDetalle?.();
