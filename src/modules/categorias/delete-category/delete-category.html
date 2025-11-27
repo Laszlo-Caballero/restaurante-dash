@@ -1,0 +1,25 @@
+<app-modal (click)="onCloseModal()" className="max-w-3xl">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Eliminar Categoria</h2>
+
+    <button (click)="onCloseModal()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <p>
+    ¿Estás seguro de que deseas eliminar la categoría "<strong>{{ category?.nombre }}</strong
+    >"? Esta acción no se puede deshacer y se eliminarán todos los platillos asociados a esta
+    categoría.
+  </p>
+
+  <footer class="flex justify-end w-full gap-x-2">
+    <app-button
+      className="bg-transparent text-black border border-slate-300"
+      (click)="onCloseModal()"
+    >
+      Cancelar
+    </app-button>
+    <app-button (click)="onSubmitDelete()"> Eliminar Categoria </app-button>
+  </footer>
+</app-modal>

@@ -25,8 +25,10 @@
     [categoryDescription]="category.descripcion"
     [categoryImageUrl]="category.recurso.nombre"
     [itemCount]="category.totalComidas"
+    [categoryStatus]="category.estado"
     [categoryId]="category.id"
     [openEditModal]="openEditModal"
+    [openDeleteModal]="openDeleteModal"
   />
   }
 </section>
@@ -37,4 +39,6 @@
 <app-create-categoria [onCloseModal]="onCloseModal" />
 } @if(isOpenEdit && selectedCategoryId !== null){
 <app-update-categoria [categoriaId]="selectedCategoryId" [onCloseModal]="closeEditModal" />
+} @if(isOpenDelete && findCategory){
+<app-delete-category [category]="findCategory" [onCloseModal]="closeDeleteModal" />
 }

@@ -9,6 +9,16 @@
       <h3 class="text-lg font-medium text-slate-700">{{ categoryName }}</h3>
     </div>
 
+    <span class="block py-2 px-4 rounded-4xl border font-semibold border-slate-300 bg-slate-50">
+      {{ itemCount }} platos
+    </span>
+  </header>
+
+  <app-bagde className="mb-2 w-full max-w-none font-semibold">
+    {{ categoryStatus ? 'Activo' : 'Inactivo' }}
+  </app-bagde>
+
+  <div class="flex items-center justify-between">
     <app-button
       className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
       (click)="openEditModal(categoryId)"
@@ -16,15 +26,16 @@
       <lucide-angular [img]="EditIcon" class="size-4" />
       Editar
     </app-button>
-  </header>
 
-  <div class="flex items-center justify-between">
-    <p class="text-slate-400 text-sm">
-      {{ categoryDescription }}
-    </p>
-
-    <span class="block py-2 px-4 rounded-4xl border font-semibold border-slate-300 bg-slate-50">
-      {{ itemCount }} platos
-    </span>
+    <app-button
+      className="bg-slate-50 border flex items-center gap-x-2 py-1 border-slate-300 text-black"
+      (click)="openDeleteModal(categoryId)"
+    >
+      <lucide-angular [img]="TrashIcon" class="size-4" />
+      Eliminar
+    </app-button>
   </div>
+  <p class="text-slate-400 text-sm">
+    {{ categoryDescription }}
+  </p>
 </section>

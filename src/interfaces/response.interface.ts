@@ -25,6 +25,7 @@ export interface ResponseCategoria {
   // comidas: any[]
   recurso: ResponseRecurso;
   totalComidas: number;
+  estado: boolean;
 }
 
 export interface ResponseRecurso {

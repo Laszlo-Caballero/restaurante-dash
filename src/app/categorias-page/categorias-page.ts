@@ -13,6 +13,7 @@ import { CardCategory } from '@/components/ui/card-category/card-category';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCategoria } from '@/modules/categorias/create-categoria/create-categoria';
 import { UpdateCategoria } from '@/modules/categorias/update-categoria/update-categoria';
+import { DeleteCategory } from '@/modules/categorias/delete-category/delete-category';
 
 @Component({
   selector: 'app-categorias-page',
@@ -26,6 +27,7 @@ import { UpdateCategoria } from '@/modules/categorias/update-categoria/update-ca
     ReactiveFormsModule,
     CreateCategoria,
     UpdateCategoria,
+    DeleteCategory,
   ],
   templateUrl: './categorias-page.html',
 })
@@ -38,7 +40,9 @@ export class CategoriasPage implements OnInit {
   isError = false;
   isOpenModal = false;
   isOpenEdit = false;
+  isOpenDelete = false;
   selectedCategoryId: number | null = null;
+  findCategory: ResponseCategoria | undefined = undefined;
 
   PositionTooltip = PositionTooltip;
   PlusIcon = Plus;
@@ -61,9 +65,25 @@ export class CategoriasPage implements OnInit {
     this.selectedCategoryId = categoryId;
   };
 
+  openDeleteModal = (categoryId: number) => {
+    const category = this.categories.find((cat) => cat.id === categoryId);
+    if (!category) {
+      toast.error('Categoría no encontrada');
+      return;
+    }
+    this.findCategory = category;
+    this.isOpenDelete = true;
+  };
+
   closeEditModal = () => {
     this.isOpenEdit = false;
     this.selectedCategoryId = null;
+    this.loadCategories();
+  };
+
+  closeDeleteModal = () => {
+    this.isOpenDelete = false;
+    this.findCategory = undefined;
     this.loadCategories();
   };
 
