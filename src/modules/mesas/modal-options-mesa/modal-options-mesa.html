@@ -1,0 +1,34 @@
+<app-modal (click)="onClose()" className="w-1/2 h-[40vh]">
+  <header class="flex justify-between items-center">
+    <h2 class="text-xl font-semibold">Crear Orden</h2>
+
+    <button (click)="onClose()">
+      <lucide-angular [img]="XIcon" />
+    </button>
+  </header>
+
+  <app-tabs class="h-full" className="p-0 h-full">
+    <app-tab-header>
+      <app-tab-button [index]="0">
+        <lucide-angular [img]="EditIcon" />
+        Editar Mesa
+      </app-tab-button>
+      <app-tab-button [index]="1">
+        <lucide-angular [img]="DeleteIcon" />
+        Eliminar Mesa
+      </app-tab-button>
+    </app-tab-header>
+
+    <app-tab-list
+      class="h-full max-h-full flex"
+      className="min-h-full max-h-full flex-1 flex flex-col"
+    >
+      <app-tab>
+        <app-update-mesa class="h-full flex-1" [mesa]="mesa" [onClose]="onClose" />
+      </app-tab>
+      <app-tab>
+        <app-delete-mesa class="h-full flex-1" [mesa]="mesa" [onClose]="onClose" />
+      </app-tab>
+    </app-tab-list>
+  </app-tabs>
+</app-modal>

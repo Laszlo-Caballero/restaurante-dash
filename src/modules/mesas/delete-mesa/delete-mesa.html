@@ -1,0 +1,12 @@
+<main class="flex flex-col h-full w-full py-4">
+  <p class="text-center">
+    ¿Está seguro de que desea eliminar la mesa
+    <strong> {{ mesa.numeroMesa }} </strong>? Esta acción no se puede deshacer.
+  </p>
+  <footer class="flex justify-end w-full mt-auto gap-x-2">
+    <app-button className="bg-transparent text-black border border-slate-300" (click)="onClose()">
+      Cancelar
+    </app-button>
+    <app-button (click)="onDelete()"> Eliminar Mesa </app-button>
+  </footer>
+</main>

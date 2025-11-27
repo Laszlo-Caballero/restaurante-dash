@@ -18,8 +18,6 @@ import { TabList } from '@/components/ui/tab-list/tab-list';
 import { Tab } from '@/components/ui/tab/tab';
 import { EstadoOrden } from '@/enum/EstadoOrden';
 import { DetallePedido } from '@/components/shared/detalle-pedido/detalle-pedido';
-import { InputComponent } from '@/components/ui/input/input';
-import { Bagde } from '@/components/ui/bagde/bagde';
 
 @Component({
   selector: 'app-create-orden',

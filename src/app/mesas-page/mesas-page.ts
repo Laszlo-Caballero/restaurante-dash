@@ -8,10 +8,11 @@ import { toast } from 'ngx-sonner';
 import { Load } from '@/components/ui/load/load';
 import { CardTable } from '@/components/ui/card-table/card-table';
 import { CreateMesa } from '@/modules/mesas/create-mesa/create-mesa';
+import { ModalOptionsMesa } from '@/modules/mesas/modal-options-mesa/modal-options-mesa';
 
 @Component({
   selector: 'app-mesas-page',
-  imports: [Title, Button, Load, CardTable, CreateMesa],
+  imports: [Title, Button, Load, CardTable, CreateMesa, ModalOptionsMesa],
   templateUrl: './mesas-page.html',
 })
 export class MesasPage implements OnInit {
@@ -20,6 +21,8 @@ export class MesasPage implements OnInit {
 
   isLoading = signal(false);
   isOpenCreateMesa = signal(false);
+  isOpenEDMesa = signal(false);
+  selectedMesa = signal<ResponseMesa | null>(null);
 
   mesas = signal<ResponseMesa[]>([]);
 
@@ -33,6 +36,16 @@ export class MesasPage implements OnInit {
 
   closeCreateMesa = () => {
     this.isOpenCreateMesa.set(false);
+    this.loadMesas();
+  };
+
+  openEDMesa(mesa: ResponseMesa) {
+    this.selectedMesa.set(mesa);
+    this.isOpenEDMesa.set(true);
+  }
+
+  closeEDMesa = () => {
+    this.isOpenEDMesa.set(false);
     this.loadMesas();
   };
 

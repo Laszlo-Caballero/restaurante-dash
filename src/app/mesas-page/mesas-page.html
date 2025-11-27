@@ -31,6 +31,7 @@
       [tableNumber]="mesa.numeroMesa"
       [capacity]="mesa.capacidad"
       [status]="mesa.disponible"
+      (click)="openEDMesa(mesa)"
     />
     }
   </section>
@@ -40,4 +41,6 @@
 <app-load />
 } @if(isOpenCreateMesa()){
 <app-create-mesa [onClose]="closeCreateMesa" />
+} @if(isOpenEDMesa()){
+<app-modal-options-mesa [mesa]="selectedMesa()!" [onClose]="closeEDMesa" />
 }
