@@ -1,10 +1,14 @@
 import { ResponseOrden } from '@/interfaces/ordenes.interface';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, signal, ViewChild } from '@angular/core';
 import { InputComponent } from '@/components/ui/input/input';
 import { Bagde } from '@/components/ui/bagde/bagde';
 import { Check, Clock, CreditCardIcon, LucideAngularModule, Printer } from 'lucide-angular';
 import { cx } from '@/utils/cx';
 import { Button } from '@/components/ui/button/button';
+import { AuthService } from '@/services/auth/auth-service';
+import { HttpService } from '@/services/http/http-service';
+import { toast } from 'ngx-sonner';
+import { EstadoPedido, PedidoEnum } from '@/enum/EstadoPedido';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -14,13 +18,19 @@ import { Button } from '@/components/ui/button/button';
 export class DetallePedido {
   @Input() detalle?: ResponseOrden;
   @Input() className?: string = '';
+  @Input() relaodDetalle?: () => void;
 
   CardIcon = CreditCardIcon;
   EstadoIcon = Clock;
   PrinterIcon = Printer;
   CheckIcon = Check;
 
+  isLoading = signal(false);
+
   @ViewChild('printSection') printSection!: ElementRef<HTMLDivElement>;
+
+  authService = inject(AuthService);
+  httpClient = inject(HttpService);
 
   cx = cx;
 
@@ -105,5 +115,37 @@ export class DetallePedido {
       iframe.contentWindow!.print();
       document.body.removeChild(iframe); // eliminar iframe luego
     };
+  }
+
+  onChangeEstado(pedidoComidaId: string | number, nuevoEstado: keyof typeof EstadoPedido) {
+    if (this.detalle?.estado === PedidoEnum.CANCELADO) {
+      toast.error('No se puede cambiar el estado de un pedido cancelado');
+      return;
+    }
+
+    const parseEstado = EstadoPedido[nuevoEstado];
+
+    this.isLoading.set(true);
+    this.httpClient
+      .put(
+        `pedidos/cambiar-estado/${pedidoComidaId}/${parseEstado}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${this.authService.token}`,
+          },
+        }
+      )
+      .subscribe({
+        next: () => {
+          toast.success('Estado actualizado con éxito');
+          this.relaodDetalle?.();
+          this.isLoading.set(false);
+        },
+        error: () => {
+          toast.error('Error al actualizar el estado');
+          this.isLoading.set(false);
+        },
+      });
   }
 }

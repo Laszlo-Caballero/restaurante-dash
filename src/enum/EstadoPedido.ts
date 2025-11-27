@@ -1,0 +1,11 @@
+export enum EstadoPedido {
+  PENDIENTE = 'PENDIENTE',
+  DESPACHADO = 'DESPACHADO',
+  CANCELADO = 'CANCELADO',
+  COMPLETADO = 'COMPLETADO',
+}
+export enum PedidoEnum {
+  PENDIENTE = 'PENDIENTE',
+  PAGADO = 'PAGADO',
+  CANCELADO = 'CANCELADO',
+}

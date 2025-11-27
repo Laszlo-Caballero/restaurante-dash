@@ -69,6 +69,32 @@
         <span class="flex flex-col">
           <p class="font-semibold">Disponible: {{ comida.comida.disponible ? 'Sí' : 'No' }}</p>
         </span>
+        <span class="flex items-center gap-2 col-span-2">
+          <app-bagde
+            [className]="cx(comida.estado === 'PENDIENTE' && 'bg-slate-900 text-white')"
+            (click)="onChangeEstado(comida.pedidoComidaId, 'PENDIENTE')"
+          >
+            Pendiente
+          </app-bagde>
+          <app-bagde
+            [className]="cx(comida.estado === 'DESPACHADO' && 'bg-slate-900 text-white')"
+            (click)="onChangeEstado(comida.pedidoComidaId, 'DESPACHADO')"
+          >
+            Despachado
+          </app-bagde>
+          <app-bagde
+            [className]="cx(comida.estado === 'CANCELADO' && 'bg-slate-900 text-white')"
+            (click)="onChangeEstado(comida.pedidoComidaId, 'CANCELADO')"
+          >
+            Cancelado
+          </app-bagde>
+          <app-bagde
+            [className]="cx(comida.estado === 'COMPLETADO' && 'bg-slate-900 text-white')"
+            (click)="onChangeEstado(comida.pedidoComidaId, 'COMPLETADO')"
+          >
+            Completado
+          </app-bagde>
+        </span>
       </div>
       }
     </div>

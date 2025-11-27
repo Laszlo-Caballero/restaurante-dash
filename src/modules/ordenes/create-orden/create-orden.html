@@ -42,7 +42,11 @@
         </footer>
       </app-tab>
       <app-tab class="h-full">
-        <app-detalle-pedido className="max-h-[500px]" [detalle]="ordenDetails()" />
+        <app-detalle-pedido
+          className="max-h-[500px]"
+          [detalle]="ordenDetails()"
+          [relaodDetalle]="reload"
+        />
       </app-tab>
     </app-tab-list>
   </app-tabs>

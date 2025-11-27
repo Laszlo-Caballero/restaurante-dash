@@ -1,9 +1,9 @@
 <div
-  class="flex flex-col gap-2 border items-center w-full justify-center border-slate-300 p-3 rounded-3xl"
+  class="flex flex-col gap-2 border items-center h-full w-full justify-center border-slate-300 p-3 rounded-3xl"
 >
   <img [src]="getImageUrl()" class="w-full h-24 rounded-xl object-cover" />
   <p class="text-lg font-semibold">{{ comida.nombre }}</p>
-  <div class="flex items-center w-full justify-between">
+  <div class="flex items-center w-full justify-between mt-auto">
     <button
       class="p-2 rounded-full text-white bg-slate-950 flex items-center justify-center"
       (click)="onDecrease(comida.comidaId)"

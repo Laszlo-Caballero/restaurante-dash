@@ -107,6 +107,10 @@ export class CreateOrden implements OnInit {
     return this.pedidoId ? 'Agregar Items' : 'Crear Orden';
   }
 
+  reload = () => {
+    this.loadOrden();
+  };
+
   addItem() {
     if (!this.pedidoId) return;
     if (this.selectedComidas().length === 0) {
