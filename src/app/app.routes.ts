@@ -13,6 +13,7 @@ import { UsuariosPage } from './usuarios-page/usuarios-page';
 import { MesasPage } from './mesas-page/mesas-page';
 import { OrdenesPage } from './ordenes-page/ordenes-page';
 import { ActualizarComida } from './comida-page/actualizar-comida/actualizar-comida';
+import { PedidosPage } from './pedidos-page/pedidos-page';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
       {
         path: 'ordenes',
         component: OrdenesPage,
+      },
+      {
+        path: 'pedidos',
+        component: PedidosPage,
       },
     ],
   },

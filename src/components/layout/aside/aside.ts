@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import {
+  FileSearchIcon,
   Hamburger,
   Image,
   LayoutGrid,
@@ -32,6 +33,7 @@ export class Aside implements AfterViewInit {
   readonly TagsIcon = Tags;
   readonly TableIcon = Table;
   readonly OrdenesIcon = Hamburger;
+  readonly FileSearchIcon = FileSearchIcon;
 
   authService = inject(AuthService);
   isOpen = false;

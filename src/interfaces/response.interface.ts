@@ -1,3 +1,5 @@
+import { ResponseOrden } from './ordenes.interface';
+
 export interface ComidaResponse {
   comidaId: number;
   nombre: string;
@@ -48,4 +50,14 @@ export interface ResponsePedido {
   metodoPago: string;
   estado: string;
   total: number;
+  comidas: ComidaResponse[];
+  mesa: ResponseMesa;
+}
+
+export interface ResponseDashboard {
+  totalVentas: number;
+  totalPedidos: number;
+  totalMesas: number;
+  ultimosPedidos: ResponseOrden[];
+  comidas: ComidaResponse[];
 }

@@ -3,6 +3,48 @@
   subtitle="Vista general de las operaciones del restaurante"
 />
 
-<div class="grid grid-cols-4 w-full gap-2 mt-4">
-  <app-card title="Ventas de hoy" content="32" />
+<div class="grid grid-cols-3 w-full gap-2 mt-4">
+  <app-card title="Ventas de hoy" [content]="dashboardData()?.totalVentas?.toString() ?? ''" />
+  <app-card title="Pedidos activos" [content]="dashboardData()?.totalPedidos?.toString() ?? ''" />
+  <app-card
+    title="Mesas ocupadas"
+    [content]="mesas().toString() + '/' + (dashboardData()?.totalMesas ?? '')"
+  />
 </div>
+
+<app-details title="Pedidos Recientes" subtitle="" className="mt-4" childrenClassName="gap-1">
+  @for(pedido of dashboardData()?.ultimosPedidos ?? []; track pedido.pedidoId){
+  <div class="flex items-center justify-between w-full px-4 py-2 border border-slate-200">
+    <span class="flex items-center gap-2">
+      <span
+        class="size-14 rounded-lg border border-slate-300 bg-slate-100 flex items-center justify-center"
+      >
+        <lucide-angular [img]="UtensilsIcon" />
+      </span>
+      <div class="flex flex-col">
+        <p class="font-semibold">Mesa {{ pedido.mesa.mesaId }} - Orden #{{ pedido.pedidoId }}</p>
+        <p>{{ parseComidas(pedido.comidas) }}</p>
+      </div>
+    </span>
+  </div>
+  }
+</app-details>
+
+<div class="rounded-xl shadow-xl mt-4">
+  <app-table [data]="dashboardData()?.comidas ?? []" [columns]="columns">
+    <ng-template #actions let-row>
+      <div class="flex items-center gap-2">
+        <a
+          [routerLink]="['/comidas/editar', row.comidaId]"
+          class="text-blue-600 font-semibold hover:underline"
+          >Editar</a
+        >
+        <a [routerLink]="['/comidas/detalles', row.comidaId]"> Detalles </a>
+      </div>
+    </ng-template>
+  </app-table>
+</div>
+
+@if(isLoading()){
+<app-load />
+}
